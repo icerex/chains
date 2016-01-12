@@ -10,7 +10,7 @@ class WechatController {
 
     def index() { }
 
-    def checkSignature(){
+    def signature(){
         String signature = params."signature" as String
         String nonce = params."nonce" as String
         String timestamp = params."timestamp" as String

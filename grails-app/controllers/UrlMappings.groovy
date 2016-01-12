@@ -6,6 +6,8 @@ class UrlMappings {
                 // apply constraints here
             }
         }
+        "/api/1.0/wechat/signature"(controller: 'wechat', action: 'signature')
+        "/api/1.0/qiniu/callback"(controller: 'qiniu', action: 'callback')
 
         "/"(view:"/index")
         "500"(view:'/error')
