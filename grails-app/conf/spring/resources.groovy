@@ -1,8 +1,9 @@
-import com.teamlinking.chains.storage.QiniuBean
+import com.teamlinking.chains.storage.QiniuUpload
 import grails.util.Environment
 import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage
 import me.chanjar.weixin.mp.api.WxMpServiceImpl
 
+def domain = "http://chains.teamlinking.com"
 // Place your Spring DSL code here
 beans = {
     switch (Environment.current) {
@@ -13,14 +14,13 @@ beans = {
                 token = "098f6bcd4621d373cade4e832627b4f6"
                 aesKey = "IlEG9ZQXgDms3RPei76Azfh9pAEX3Hn8xwb1JDkbiY1"
             }
-            qiniuBean(QiniuBean){ bean ->
-                bean.initMethod = 'init'
+            qiniuUpload(QiniuUpload){
                 accessKey = "EacROcMBQ0iTbhxN4B5q5n4Qtvafx4qelGaFDpm6"
                 secretKey = "ZfD33BUE3CDP9HcLSulF2hBtW_tiTPWfjOrWnEdi"
                 bucket = "teamlinking"
                 audioPipeline = "mp3cut"
                 vedioPipeline = "mp4cut"
-                persistentNotifyUrl = "http://chains.teamlinking.com/api/1.0/qiniu/callback"
+                persistentNotifyUrl = domain+"/api/1.0/qiniu/callback"
             }
 
             break
@@ -32,14 +32,13 @@ beans = {
                 token = "098f6bcd4621d373cade4e832627b4f6"
                 aesKey = "IlEG9ZQXgDms3RPei76Azfh9pAEX3Hn8xwb1JDkbiY1"
             }
-            qiniuBean(QiniuBean){ bean ->
-                bean.initMethod = 'init'
+            qiniuUpload(QiniuUpload){
                 accessKey = "EacROcMBQ0iTbhxN4B5q5n4Qtvafx4qelGaFDpm6"
                 secretKey = "ZfD33BUE3CDP9HcLSulF2hBtW_tiTPWfjOrWnEdi"
                 bucket = "teamlinking"
                 audioPipeline = "mp3cut"
                 vedioPipeline = "mp4cut"
-                persistentNotifyUrl = "http://chains.teamlinking.com/api/1.0/qiniu/callback"
+                persistentNotifyUrl = domain+"/api/1.0/qiniu/callback"
             }
 
             break

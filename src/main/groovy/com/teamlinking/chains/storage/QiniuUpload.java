@@ -5,20 +5,17 @@ import com.qiniu.http.Response;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.storage.persistent.FileRecorder;
 import com.qiniu.util.Auth;
-import com.qiniu.util.Etag;
 import com.qiniu.util.StringMap;
-import com.qiniu.util.UrlSafeBase64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
+import org.springframework.beans.factory.InitializingBean;
 
 /**
  * Created by admin on 16/1/12.
  */
-public class QiniuBean {
+public class QiniuUpload implements InitializingBean {
 
-    private static Logger logger = LoggerFactory.getLogger(QiniuBean.class);
+    private static Logger logger = LoggerFactory.getLogger(QiniuUpload.class);
 
     private String accessKey;
     private String secretKey;
@@ -34,7 +31,7 @@ public class QiniuBean {
     private Auth auth;
     private UploadManager uploadManager;
 
-    public void init() throws IOException {
+    public void afterPropertiesSet() throws Exception {
         auth = Auth.create(accessKey,secretKey);
         if (pathFile != null && pathFile.length() > 0){
             uploadManager = new UploadManager(new FileRecorder(pathFile));
