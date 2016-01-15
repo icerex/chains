@@ -4,7 +4,11 @@ class User {
 
     Long id
 
+    Byte status = 1 as Byte
+
     String openId
+
+    String unionId
 
     String nickname
 
@@ -25,10 +29,12 @@ class User {
     Date lastUpdated
 
     static constraints = {
+        status inList: [1 as byte, 0 as byte]
         dateCreated nullable: false, blank: false
         nickname nullable: false, blank: false
         sexId inList: [0,1,2]
         openId nullable: true, blank: true
+        unionId nullable: true, blank: true
         lastUpdated nullable: true, blank:true
         city nullable: true, blank: true
         province nullable: true, blank:true

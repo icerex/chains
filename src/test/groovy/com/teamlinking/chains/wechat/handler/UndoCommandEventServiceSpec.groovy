@@ -1,4 +1,4 @@
-package com.teamlinking.chains.wechat.interceptor
+package com.teamlinking.chains.wechat.handler
 
 import grails.test.mixin.TestFor
 import spock.lang.Specification
@@ -6,8 +6,8 @@ import spock.lang.Specification
 /**
  * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
  */
-@TestFor(MenuCommandInterceptorService)
-class MenuCommandInterceptorServiceSpec extends Specification {
+@TestFor(UndoCommandEventService)
+class UndoCommandEventServiceSpec extends Specification {
 
     def setup() {
     }
@@ -16,7 +16,7 @@ class MenuCommandInterceptorServiceSpec extends Specification {
     }
 
     void "test something"() {
-        expect:"fix me"
-            true == false
+        expect: "fix me"
+        true == false
     }
 }

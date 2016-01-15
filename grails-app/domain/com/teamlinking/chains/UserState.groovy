@@ -13,6 +13,10 @@ class UserState {
     Long currentStoryId
 
     String command
+    //纬度
+    Double latitude
+    //精度
+    Double longitude
 
     static constraints = {
         uid nullable: false, blank: false
@@ -20,6 +24,8 @@ class UserState {
         currentStoryId nullable: false, blank: false
         lastUpdated nullable: true, blank:true
         command nullable: true, blank:true
+        latitude nullable: true, blank:true
+        longitude nullable: true, blank:true
     }
 
     static mapping = {

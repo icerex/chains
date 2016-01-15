@@ -110,7 +110,7 @@ class WechatController {
                 '        ]' +
                 '      },' +
                 '      {' +
-                '        "name": "菜单",' +
+                '        "name": "查看",' +
                 '        "sub_button": [' +
                 '          {' +
                 '            "type": "view",' +

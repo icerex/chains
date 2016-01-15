@@ -35,9 +35,16 @@ class SubscribeEventService implements WxMpMessageHandler{
         Validate.notNull(wxMpUser)
         User user = User.findByOpenId(wxMpUser.openId)
         if (user == null){
-            user = new User(
-                    dateCreated: new Date()
-            )
+            if (wxMpUser.unionId) {
+                user = User.findByUnionId(wxMpUser.unionId)
+            }
+            if (user){
+                user.openId = wxMpUser.openId
+            }else {
+                user = new User(
+                        dateCreated: new Date()
+                )
+            }
         }
         BeanUtils.copyProperties(wxMpUser,user)
         user.lastUpdated = new Date()
