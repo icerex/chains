@@ -3,7 +3,6 @@ import grails.util.Environment
 import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage
 import me.chanjar.weixin.mp.api.WxMpServiceImpl
 
-def domain = "http://chains.teamlinking.com"
 // Place your Spring DSL code here
 beans = {
     switch (Environment.current) {
@@ -20,7 +19,7 @@ beans = {
                 bucket = "teamlinking"
                 audioPipeline = "mp3cut"
                 vedioPipeline = "mp4cut"
-                persistentNotifyUrl = domain+"/api/1.0/qiniu/callback"
+                persistentNotifyUrl = "http://chains.teamlinking.com/api/1.0/qiniu/callback"
             }
 
             break
@@ -38,7 +37,7 @@ beans = {
                 bucket = "teamlinking"
                 audioPipeline = "mp3cut"
                 vedioPipeline = "mp4cut"
-                persistentNotifyUrl = domain+"/api/1.0/qiniu/callback"
+                persistentNotifyUrl = "http://chains.teamlinking.com/api/1.0/qiniu/callback"
             }
 
             break

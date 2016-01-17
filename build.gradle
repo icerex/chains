@@ -92,6 +92,14 @@ dependencies {
     compile "me.chanjar:weixin-java-mp:1.3.3"
 }
 
+loadConfiguration()
+
+
+def loadConfiguration() {
+    def environment = hasProperty('env') ? env : 'dev'
+    println "Environment is set to $environment"
+}
+
 task wrapper(type: Wrapper) {
     gradleVersion = gradleWrapperVersion
 }
