@@ -10,6 +10,8 @@ class Node {
 
     Byte status = 1 as Byte
 
+    Date nodeTime
+
     Long uid
 
     Long storyId
@@ -34,6 +36,7 @@ class Node {
         uid nullable: false, blank: false
         dateCreated nullable: false, blank: false
         status inList: [1 as byte, 0 as byte]
+        nodeTime nullable: false, blank: false
         storyId nullable: false, blank:false
         nodeType nullable: false, blank:false
         lastUpdated nullable: true, blank:true

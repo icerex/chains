@@ -92,7 +92,7 @@ environments:
             dbCreate : "update" # one of 'create', 'create-drop', 'update', 'validate', ''
             username : "chains"
             password : "aliyun521"
-            url : "jdbc:mysql://teamlinking.mysql.rds.aliyuncs.com:3306/chains-test?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull"
+            url : "jdbc:mysql://teamlinking.mysql.rds.aliyuncs.com:3306/timelinetest?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull"
             loggingSql : true
             properties:
                 jmxEnabled: true
@@ -117,7 +117,7 @@ environments:
             dbCreate : "update" # one of 'create', 'create-drop', 'update', 'validate', ''
             username : "chains"
             password : "aliyun521"
-            url : "jdbc:mysql://teamlinking.mysql.rds.aliyuncs.com:3306/chains-test?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull"
+            url : "jdbc:mysql://teamlinking.mysql.rds.aliyuncs.com:3306/timelinetest?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull"
             properties:
                 jmxEnabled: true
                 initialSize: 5
@@ -139,7 +139,7 @@ environments:
     production:
         dataSource:
             dbCreate : "update" # one of 'create', 'create-drop', 'update', 'validate', ''
-            url : "jdbc:mysql://teamlinking.mysql.rds.aliyuncs.com/chains-test?useUnicode=true&amp;characterEncoding=utf8mb4&zeroDateTimeBehavior=convertToNull"
+            url : "jdbc:mysql://teamlinking.mysql.rds.aliyuncs.com/timelinetest?useUnicode=true&amp;characterEncoding=utf8mb4&zeroDateTimeBehavior=convertToNull"
             username : "chains"
             password : "aliyun521"
             properties:
