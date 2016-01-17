@@ -2,7 +2,7 @@
 grails:
     profile: web
     codegen:
-        defaultPackage: jinconsole
+        defaultPackage: chains
 info:
     app:
         name: '@info.app.name@'
