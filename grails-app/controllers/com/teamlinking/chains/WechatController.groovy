@@ -1,5 +1,6 @@
 package com.teamlinking.chains
 
+import com.alibaba.fastjson.JSON
 import com.teamlinking.chains.common.Constans
 import com.teamlinking.chains.wechat.MessageRouterService
 import me.chanjar.weixin.common.bean.WxMenu
@@ -59,6 +60,24 @@ class WechatController {
         withFormat {
             json {
                 render text: result, contentType: 'text/xml;', encoding: "UTF-8"
+            }
+        }
+    }
+
+    def signature() {
+        String url = params."url" as String
+
+        def sign = wxMpService.createJsapiSignature(url)
+
+        def result = [:]
+        result.put("appId", sign.appid)
+        result.put("timestamp", sign.timestamp)
+        result.put("nonceStr", sign.noncestr)
+        result.put("signature", sign.signature)
+
+        withFormat {
+            json {
+                render text: result, contentType: 'application/json;', encoding: "UTF-8"
             }
         }
     }
