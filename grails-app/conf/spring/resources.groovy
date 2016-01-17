@@ -27,8 +27,8 @@ beans = {
         case Environment.DEVELOPMENT:
         case Environment.TEST:
             wxMpConfigStorage(WxMpInMemoryConfigStorage){
-                appId = "wxef4f18e4e555cb98"
-                secret = "a5a0562f84205e7b5aef8ab875d2810a"
+                appId = "wx8e20bfc04fbb49cd"
+                secret = "d4624c36b6795d1d99dcf0547af5443d"
                 token = "098f6bcd4621d373cade4e832627b4f6"
                 aesKey = "IlEG9ZQXgDms3RPei76Azfh9pAEX3Hn8xwb1JDkbiY1"
             }
