@@ -1,5 +1,6 @@
 package com.teamlinking.chains
 
+import com.alibaba.fastjson.JSON
 import com.teamlinking.chains.common.Constans
 import com.teamlinking.chains.wechat.MessageRouterService
 import me.chanjar.weixin.common.bean.WxMenu
@@ -76,7 +77,7 @@ class WechatController {
 
         withFormat {
             json {
-                render text: result, contentType: 'application/json;', encoding: "UTF-8"
+                render text: JSON.toJSONString(result), contentType: 'application/json;', encoding: "UTF-8"
             }
         }
     }
@@ -150,7 +151,7 @@ class WechatController {
 
         withFormat {
             json {
-                render text: "Wechat menu create success!", contentType: 'text/xml;', encoding: "UTF-8"
+                render text: "Wechat menu create success!", contentType: 'application/json;', encoding: "UTF-8"
             }
         }
     }
