@@ -1,6 +1,5 @@
 package com.teamlinking.chains
 
-import com.alibaba.fastjson.JSON
 import com.teamlinking.chains.common.Constans
 import com.teamlinking.chains.wechat.MessageRouterService
 import me.chanjar.weixin.common.bean.WxMenu

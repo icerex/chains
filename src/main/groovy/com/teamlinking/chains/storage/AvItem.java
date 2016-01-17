@@ -4,19 +4,13 @@ package com.teamlinking.chains.storage;
  * Created by admin on 16/1/13.
  */
 public class AvItem {
-    /*
-      1 = {java.util.HashMap$Node@13122} "returnOld" -> "1"
-  2 = {java.util.HashMap$Node@13123} "cmd" -> "avthumb/wav"
-  3 = {java.util.HashMap$Node@13124} "hash" -> "FouncjDqFmj2eR2jN1WPT3XY61Gm"
-  4 = {java.util.HashMap$Node@13125} "key" -> "gmmEuoOYU3CGJCsvcgJYR6pFb4w=/Fl3aw3pAmPPL2kAGmgWOAV0Y6bqi"
-  5 = {java.util.HashMap$Node@13126} "desc" -> "The fop was completed successfully"
-       */
-    String returnOld;
-    String cmd;
-    String hash;
-    String key;
-    String desc;
-    int code;
+
+    private String returnOld;
+    private String cmd;
+    private String hash;
+    private String key;
+    private String desc;
+    private int code;
 
     public int getCode() {
         return code;

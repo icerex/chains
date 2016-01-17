@@ -1,6 +1,5 @@
 package com.teamlinking.chains.wechat.handler
 
-import com.teamlinking.chains.Story
 import com.teamlinking.chains.UserState
 import grails.transaction.Transactional
 import me.chanjar.weixin.common.exception.WxErrorException
