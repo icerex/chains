@@ -25,6 +25,8 @@ class Node {
     String audioUrl
 
     String videoUrl
+    //音频或视频的长度,单位s
+    Double avDuration
 
     String locationLab
     //纬度
@@ -44,6 +46,7 @@ class Node {
         picUrl nullable: true, blank:true
         audioUrl nullable: true, blank:true
         videoUrl nullable: true, blank:true
+        avDuration nullable: true, blank:true
         locationLab nullable: true, blank:true
         latitude nullable: true, blank:true
         longitude nullable: true, blank:true

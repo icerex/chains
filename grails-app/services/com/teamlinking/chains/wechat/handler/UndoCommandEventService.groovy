@@ -104,7 +104,7 @@ class UndoCommandEventService implements WxMpMessageHandler{
     }
 
     void popNode(Node node,NodeType nodeType){
-        node.nodeType = nodeType.key
+        node.nodeType = nodeType.value
         node.lastUpdated = new Date()
         node.save(flush: true, failOnError: true)
     }
