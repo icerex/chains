@@ -1,7 +1,7 @@
 package com.teamlinking.chains
 
 import com.alibaba.fastjson.JSON
-import com.teamlinking.chains.common.Constans
+import com.teamlinking.chains.common.Constants
 import com.teamlinking.chains.wechat.MessageRouterService
 import me.chanjar.weixin.common.bean.WxMenu
 import me.chanjar.weixin.mp.api.WxMpConfigStorage
@@ -93,38 +93,38 @@ class WechatController {
                 '        "sub_button": [' +
                 '          {' +
                 '            "type": "click",' +
-                '            "name": "'+Constans.WechatMenu.currentStory.name+'",' +
-                '            "key": "'+ Constans.WechatMenu.currentStory.key + '"' +
+                '            "name": "'+Constants.WechatMenu.currentStory.name+'",' +
+                '            "key": "'+ Constants.WechatMenu.currentStory.key + '"' +
                 '          },' +
                 '          {' +
                 '            "type": "click",' +
-                '            "name": "'+Constans.WechatMenu.updateStory.name+'",' +
-                '            "key": "'+ Constans.WechatMenu.updateStory.key + '"' +
+                '            "name": "'+Constants.WechatMenu.updateStory.name+'",' +
+                '            "key": "'+ Constants.WechatMenu.updateStory.key + '"' +
                 '          },' +
                 '          {' +
                 '            "type": "click",' +
-                '            "name": "'+Constans.WechatMenu.addStory.name+'",' +
-                '            "key": "'+ Constans.WechatMenu.addStory.key + '"' +
+                '            "name": "'+Constants.WechatMenu.addStory.name+'",' +
+                '            "key": "'+ Constants.WechatMenu.addStory.key + '"' +
                 '          },' +
                 '          {' +
                 '            "type": "click",' +
-                '            "name": "'+Constans.WechatMenu.addSubStory.name+'",' +
-                '            "key": "'+ Constans.WechatMenu.addSubStory.key + '"' +
+                '            "name": "'+Constants.WechatMenu.addSubStory.name+'",' +
+                '            "key": "'+ Constants.WechatMenu.addSubStory.key + '"' +
                 '          },' +
                 '          {' +
                 '            "type": "click",' +
-                '            "name": "'+Constans.WechatMenu.nextStory.name+'",' +
-                '            "key": "'+ Constans.WechatMenu.nextStory.key + '"' +
+                '            "name": "'+Constants.WechatMenu.nextStory.name+'",' +
+                '            "key": "'+ Constants.WechatMenu.nextStory.key + '"' +
                 '          },' +
                 '          {' +
                 '            "type": "click",' +
-                '            "name": "'+Constans.WechatMenu.backParent.name+'",' +
-                '            "key": "'+ Constans.WechatMenu.backParent.key + '"' +
+                '            "name": "'+Constants.WechatMenu.backParent.name+'",' +
+                '            "key": "'+ Constants.WechatMenu.backParent.key + '"' +
                 '          },' +
                 '          {' +
                 '            "type": "click",' +
-                '            "name": "'+Constans.WechatMenu.undo.name+'",' +
-                '            "key": "'+ Constans.WechatMenu.undo.key + '"' +
+                '            "name": "'+Constants.WechatMenu.undo.name+'",' +
+                '            "key": "'+ Constants.WechatMenu.undo.key + '"' +
                 '          }' +
                 '        ]' +
                 '      },' +
@@ -139,7 +139,7 @@ class WechatController {
                 '          {' +
                 '            "type": "view",' +
                 '            "name": "个人中心",' +
-                '            "url": "http://chains.teamlinking.com/1/user"' +
+                '            "url": "http://chains.teamlinking.com/1/user/current"' +
                 '          }' +
                 '        ]' +
                 '      }' +

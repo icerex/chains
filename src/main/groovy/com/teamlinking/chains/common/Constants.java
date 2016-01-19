@@ -3,7 +3,7 @@ package com.teamlinking.chains.common;
 /**
  * Created by admin on 16/1/14.
  */
-public interface Constans {
+public interface Constants {
 
     enum WechatMenu {
 
@@ -109,6 +109,8 @@ public interface Constans {
 
     }
 
+    String ENCODE_32_SALT = "8esflhw9y2435kcr6xqinojzm7pgd1tv";
+
     String WECHAT_MSGTYPE_TEXT_COMMAND_UNDO = "取消";
 
     /** 微信消息返回 **/
@@ -136,5 +138,12 @@ public interface Constans {
     String WECHAT_MSG_NODE_AUDIO_SUCCESS = "语音保存成功";
     String WECHAT_MSG_NODE_VIDEO_SUCCESS = "视频保存成功";
     String WECHAT_MSG_NODE_LOCATION_SUCCESS = "地理位置设置成功";
+
+
+    //微信用户cookie常量
+    String WECHAT_OPEN_ID = "WECHAT_OPEN_ID";
+    String WECHAT_ACCESSTOKEN = "WECHAT_ACCESSTOKEN";
+    String WECHAT_REFRESHTOKEN = "WECHAT_REFRESHTOKEN";
+    String WECHAT_UNION_ID = "WECHAT_UNION_ID";
 
 }

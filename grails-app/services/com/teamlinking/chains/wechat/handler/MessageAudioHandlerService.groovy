@@ -2,7 +2,7 @@ package com.teamlinking.chains.wechat.handler
 
 import com.teamlinking.chains.Node
 import com.teamlinking.chains.UserState
-import com.teamlinking.chains.common.Constans
+import com.teamlinking.chains.common.Constants
 import com.teamlinking.chains.domain.NodeService
 import com.teamlinking.chains.domain.WechatMessageService
 import me.chanjar.weixin.common.exception.WxErrorException
@@ -26,7 +26,7 @@ class MessageAudioHandlerService implements WxMpMessageHandler{
         //记录节点
         Node node = nodeService.saveByAudio(userState,wxMessage.mediaId)
         wechatMessageService.insert(userState.uid,node.id,wxMessage)
-        String content = Constans.WECHAT_MSG_NODE_AUDIO_SUCCESS
+        String content = Constants.WECHAT_MSG_NODE_AUDIO_SUCCESS
         //todo 启动上传任务
 
         return WxMpXmlOutMessage.TEXT().content(content).fromUser(wxMessage.toUserName).toUser(wxMessage.fromUserName).build()

@@ -1,6 +1,6 @@
 package com.teamlinking.chains.wechat
 
-import com.teamlinking.chains.common.Constans
+import com.teamlinking.chains.common.Constants
 import com.teamlinking.chains.wechat.handler.LocationEventService
 import com.teamlinking.chains.wechat.handler.MenuCommandClickEventService
 import com.teamlinking.chains.wechat.handler.MenuCurrentStoryClickEventService
@@ -49,15 +49,15 @@ class MessageRouterService implements InitializingBean {
         wxMpMessageRouter = new WxMpMessageRouter(wxMpService)
         wxMpMessageRouter = wxMpMessageRouter.rule().msgType(WxConsts.XML_MSG_EVENT).event(WxConsts.EVT_SUBSCRIBE).handler(subscribeEventService).end()
 
-        wxMpMessageRouter = wxMpMessageRouter.rule().msgType(WxConsts.XML_MSG_EVENT).event(WxConsts.BUTTON_CLICK).eventKey(Constans.WechatMenu.undo.key).handler(undoCommandEventService).interceptor(dataInterceptorService).end()
+        wxMpMessageRouter = wxMpMessageRouter.rule().msgType(WxConsts.XML_MSG_EVENT).event(WxConsts.BUTTON_CLICK).eventKey(Constants.WechatMenu.undo.key).handler(undoCommandEventService).interceptor(dataInterceptorService).end()
 
-        wxMpMessageRouter = wxMpMessageRouter.rule().msgType(WxConsts.XML_MSG_EVENT).event(WxConsts.BUTTON_CLICK).eventKey(Constans.WechatMenu.currentStory.key).handler(menuCurrentStoryClickEventService).interceptor(dataInterceptorService).end()
+        wxMpMessageRouter = wxMpMessageRouter.rule().msgType(WxConsts.XML_MSG_EVENT).event(WxConsts.BUTTON_CLICK).eventKey(Constants.WechatMenu.currentStory.key).handler(menuCurrentStoryClickEventService).interceptor(dataInterceptorService).end()
 
         wxMpMessageRouter = wxMpMessageRouter.rule().msgType(WxConsts.XML_MSG_EVENT).event(WxConsts.BUTTON_CLICK).handler(menuCommandClickEventService).interceptor(dataInterceptorService).end()
 
         wxMpMessageRouter = wxMpMessageRouter.rule().msgType(WxConsts.XML_MSG_EVENT).event(WxConsts.EVT_LOCATION).handler(locationEventService).interceptor(dataInterceptorService).end()
 
-        wxMpMessageRouter = wxMpMessageRouter.rule().msgType(WxConsts.XML_MSG_TEXT).content(Constans.WECHAT_MSGTYPE_TEXT_COMMAND_UNDO).handler(undoCommandEventService).interceptor(dataInterceptorService).end()
+        wxMpMessageRouter = wxMpMessageRouter.rule().msgType(WxConsts.XML_MSG_TEXT).content(Constants.WECHAT_MSGTYPE_TEXT_COMMAND_UNDO).handler(undoCommandEventService).interceptor(dataInterceptorService).end()
 
         wxMpMessageRouter = wxMpMessageRouter.rule().msgType(WxConsts.XML_MSG_TEXT).handler(messageTextHandlerService).interceptor(dataInterceptorService).end()
 

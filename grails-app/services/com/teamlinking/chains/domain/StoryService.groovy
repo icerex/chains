@@ -57,4 +57,21 @@ class StoryService {
         }
         return null
     }
+
+    /**
+     * 初始化主题数据
+     */
+    Story initMasterStory(long uid){
+        List<Story> list =  Story.findAllByUidAndParentId(uid,0,[max: 1])
+        if (list.size() == 0){
+            Story story = new Story(
+                    uid: uid,
+                    dateCreated: new Date(),
+                    title: "人生就是一场戏",
+                    lastUpdated: new Date()
+            )
+            return story.save(flush: true,failOnError: true)
+        }
+        return list.get(0)
+    }
 }

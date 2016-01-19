@@ -88,6 +88,8 @@ dataSource:
 
 environments:
     development:
+        domain : "www.teamlinking.com"
+        protocol : "http://"
         dataSource:
             dbCreate : "update" # one of 'create', 'create-drop', 'update', 'validate', ''
             username : "chains"
@@ -113,6 +115,8 @@ environments:
                 jdbcInterceptors: ConnectionState
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
     test:
+        domain : "www.teamlinking.com"
+        protocol : "http://"
         dataSource:
             dbCreate : "update" # one of 'create', 'create-drop', 'update', 'validate', ''
             username : "chains"
@@ -137,6 +141,8 @@ environments:
                 jdbcInterceptors: ConnectionState
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
     production:
+        domain : "www.teamlinking.com"
+        protocol : "http://"
         dataSource:
             dbCreate : "update" # one of 'create', 'create-drop', 'update', 'validate', ''
             url : "jdbc:mysql://teamlinking.mysql.rds.aliyuncs.com/timelinetest?useUnicode=true&amp;characterEncoding=utf8mb4&zeroDateTimeBehavior=convertToNull"

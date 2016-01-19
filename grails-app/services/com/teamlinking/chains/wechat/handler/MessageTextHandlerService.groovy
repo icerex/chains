@@ -4,7 +4,7 @@ import com.teamlinking.chains.Node
 import com.teamlinking.chains.Story
 import com.teamlinking.chains.UserState
 import com.teamlinking.chains.common.CommonUtil
-import com.teamlinking.chains.common.Constans
+import com.teamlinking.chains.common.Constants
 import com.teamlinking.chains.domain.NodeService
 import com.teamlinking.chains.domain.WechatMessageService
 import me.chanjar.weixin.common.exception.WxErrorException
@@ -30,9 +30,9 @@ class MessageTextHandlerService implements WxMpMessageHandler{
         if (userState.command) {
             //执行命令
             switch (userState.command){
-                case Constans.WechatCommand.story_add.key:
+                case Constants.WechatCommand.story_add.key:
                     if (CommonUtil.length(wxMessage.content) > 10){
-                        content = Constans.WECHAT_MSG_ADD_STORY_TEXT_LENGTH
+                        content = Constants.WECHAT_MSG_ADD_STORY_TEXT_LENGTH
                     }else {
                         Story story = new Story(
                                 dateCreated: new Date(),
@@ -43,14 +43,14 @@ class MessageTextHandlerService implements WxMpMessageHandler{
                         )
                         story = story.save()
                         userState.currentStoryId = story.id
-                        userState.command = Constans.WechatCommand.story_image_add.key
+                        userState.command = Constants.WechatCommand.story_image_add.key
                         userState.lastUpdated = new Date()
                         userState.save(flush: true, failOnError: true)
                     }
                     break
-                case Constans.WechatCommand.story_sub_add.key:
+                case Constants.WechatCommand.story_sub_add.key:
                     if (CommonUtil.length(wxMessage.content) > 10){
-                        content = Constans.WECHAT_MSG_ADD_STORY_TEXT_LENGTH
+                        content = Constants.WECHAT_MSG_ADD_STORY_TEXT_LENGTH
                     }else {
                         Story story = new Story(
                                 dateCreated: new Date(),
@@ -61,14 +61,14 @@ class MessageTextHandlerService implements WxMpMessageHandler{
                         )
                         story = story.save()
                         userState.currentStoryId = story.id
-                        userState.command = Constans.WechatCommand.story_image_add.key
+                        userState.command = Constants.WechatCommand.story_image_add.key
                         userState.lastUpdated = new Date()
                         userState.save(flush: true, failOnError: true)
                     }
                     break
-                case Constans.WechatCommand.story_upate.key:
+                case Constants.WechatCommand.story_upate.key:
                     if (CommonUtil.length(wxMessage.content) > 10){
-                        content = Constans.WECHAT_MSG_ADD_STORY_TEXT_LENGTH
+                        content = Constants.WECHAT_MSG_ADD_STORY_TEXT_LENGTH
                     }else {
                         currentStory.title = wxMessage.content
                         currentStory.lastUpdated = new Date()
@@ -76,7 +76,7 @@ class MessageTextHandlerService implements WxMpMessageHandler{
                         userState.command = null
                         userState.lastUpdated = new Date()
                         userState.save(flush: true, failOnError: true)
-                        content = String.format(Constans.WECHAT_MSG_ADD_STORY_IMAGE, currentStory.title)
+                        content = String.format(Constants.WECHAT_MSG_ADD_STORY_IMAGE, currentStory.title)
                     }
                     break
             }
@@ -84,7 +84,7 @@ class MessageTextHandlerService implements WxMpMessageHandler{
             //记录节点
             Node node = nodeService.saveByContent(userState,wxMessage.content)
             wechatMessageService.insert(userState.uid,node.id,wxMessage)
-            content = Constans.WECHAT_MSG_NODE_IMAGE_SUCCESS
+            content = Constants.WECHAT_MSG_NODE_IMAGE_SUCCESS
         }
 
         return WxMpXmlOutMessage.TEXT().content(content).fromUser(wxMessage.toUserName).toUser(wxMessage.fromUserName).build()

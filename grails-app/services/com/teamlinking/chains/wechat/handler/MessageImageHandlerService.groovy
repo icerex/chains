@@ -2,7 +2,7 @@ package com.teamlinking.chains.wechat.handler
 
 import com.teamlinking.chains.Story
 import com.teamlinking.chains.UserState
-import com.teamlinking.chains.common.Constans
+import com.teamlinking.chains.common.Constants
 import com.teamlinking.chains.domain.NodeService
 import com.teamlinking.chains.domain.WechatMessageService
 import me.chanjar.weixin.common.exception.WxErrorException
@@ -29,26 +29,26 @@ class MessageImageHandlerService implements WxMpMessageHandler{
         if (userState.command) {
             //执行命令
             switch (userState.command){
-                case Constans.WechatCommand.story_image_add.key:
+                case Constants.WechatCommand.story_image_add.key:
                     currentStory.pic = wxMessage.picUrl
                     currentStory.lastUpdated = new Date()
                     currentStory.save()
                     cleanState(userState)
-                    content = String.format(Constans.WECHAT_MSG_ADD_STORY_AFTER, currentStory.title)
+                    content = String.format(Constants.WECHAT_MSG_ADD_STORY_AFTER, currentStory.title)
                     break
-                case Constans.WechatCommand.story_upate.key:
+                case Constants.WechatCommand.story_upate.key:
                     currentStory.pic = wxMessage.picUrl
                     currentStory.lastUpdated = new Date()
                     currentStory.save()
                     cleanState(userState)
-                    content = String.format(Constans.WECHAT_MSG_UPDATE_STORY_IMAGE_AFTER, currentStory.title)
+                    content = String.format(Constants.WECHAT_MSG_UPDATE_STORY_IMAGE_AFTER, currentStory.title)
                     break
             }
         }else{
             //记录节点
             Node node = nodeService.saveByImage(userState,wxMessage.picUrl)
             wechatMessageService.insert(userState.uid,node.id,wxMessage)
-            content = Constans.WECHAT_MSG_NODE_IMAGE_SUCCESS
+            content = Constants.WECHAT_MSG_NODE_IMAGE_SUCCESS
         }
 
         return WxMpXmlOutMessage.TEXT().content(content).fromUser(wxMessage.toUserName).toUser(wxMessage.fromUserName).build()

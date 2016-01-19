@@ -1,7 +1,7 @@
 package com.teamlinking.chains.domain
 
 import com.teamlinking.chains.UserState
-import com.teamlinking.chains.common.Constans
+import com.teamlinking.chains.common.Constants
 import org.apache.commons.lang.Validate
 import com.teamlinking.chains.Node
 
@@ -16,7 +16,7 @@ class NodeService {
         Node node = getLastNode(userState.currentStoryId)
         if (node && isTimeable(node.dateCreated)){
             //是否可用合并
-            Constans.NodeType nt = Constans.NodeType.pase(node.nodeType).stack(Constans.NodeType.text)
+            Constants.NodeType nt = Constants.NodeType.pase(node.nodeType).stack(Constants.NodeType.text)
             if (nt){
                 node.content = content
                 return popNode(node,nt)
@@ -31,7 +31,7 @@ class NodeService {
                 longitude: userState.longitude,
                 latitude: userState.latitude
         )
-        return popNode(node,Constans.NodeType.text)
+        return popNode(node,Constants.NodeType.text)
     }
 
     /**
@@ -43,7 +43,7 @@ class NodeService {
         Node node = getLastNode(userState.currentStoryId)
         if (node && isTimeable(node.dateCreated)){
             //是否可用合并
-            Constans.NodeType nt = Constans.NodeType.pase(node.nodeType).stack(Constans.NodeType.pic)
+            Constants.NodeType nt = Constants.NodeType.pase(node.nodeType).stack(Constants.NodeType.pic)
             if (nt){
                 node.picUrl = picUrl
                 return popNode(node,nt)
@@ -58,7 +58,7 @@ class NodeService {
                 longitude: userState.longitude,
                 latitude: userState.latitude
         )
-        return popNode(node,Constans.NodeType.pic)
+        return popNode(node,Constants.NodeType.pic)
     }
 
     /**
@@ -70,10 +70,10 @@ class NodeService {
         Node node = getLastNode(userState.currentStoryId)
         if (node && isTimeable(node.dateCreated)){
             //是否可用合并
-            Constans.NodeType nt = Constans.NodeType.pase(node.nodeType).stack(Constans.NodeType.audio)
+            Constants.NodeType nt = Constants.NodeType.pase(node.nodeType).stack(Constants.NodeType.audio)
             if (nt){
                 node.audioId = mediaId
-                node.audioLoadState = Constans.AvLoadState.uploading.value
+                node.audioLoadState = Constants.AvLoadState.uploading.value
                 return popNode(node,nt)
             }
         }
@@ -83,11 +83,11 @@ class NodeService {
                 uid: userState.uid,
                 storyId: userState.currentStoryId,
                 audioId: mediaId,
-                audioLoadState:Constans.AvLoadState.uploading.value,
+                audioLoadState:Constants.AvLoadState.uploading.value,
                 longitude: userState.longitude,
                 latitude: userState.latitude
         )
-        return popNode(node,Constans.NodeType.audio)
+        return popNode(node,Constants.NodeType.audio)
     }
 
     /**
@@ -99,10 +99,10 @@ class NodeService {
         Node node = getLastNode(userState.currentStoryId)
         if (node && isTimeable(node.dateCreated)){
             //是否可用合并
-            Constans.NodeType nt = Constans.NodeType.pase(node.nodeType).stack(Constans.NodeType.video)
+            Constants.NodeType nt = Constants.NodeType.pase(node.nodeType).stack(Constants.NodeType.video)
             if (nt){
                 node.videoId = mediaId
-                node.videoLoadState = Constans.AvLoadState.uploading.value
+                node.videoLoadState = Constants.AvLoadState.uploading.value
                 return popNode(node,nt)
             }
         }
@@ -112,11 +112,11 @@ class NodeService {
                 uid: userState.uid,
                 storyId: userState.currentStoryId,
                 videoId: mediaId,
-                videoLoadState: Constans.AvLoadState.uploading.value,
+                videoLoadState: Constants.AvLoadState.uploading.value,
                 longitude: userState.longitude,
                 latitude: userState.latitude
         )
-        return popNode(node,Constans.NodeType.video)
+        return popNode(node,Constants.NodeType.video)
     }
 
     /**
@@ -165,7 +165,7 @@ class NodeService {
         return null
     }
 
-    void popNode(Node node, Constans.NodeType nodeType){
+    void popNode(Node node, Constants.NodeType nodeType){
         node.nodeType = nodeType.value
         node.lastUpdated = new Date()
         node.save(flush: true, failOnError: true)

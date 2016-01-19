@@ -2,7 +2,7 @@ package com.teamlinking.chains.wechat.handler
 
 import com.teamlinking.chains.Story
 import com.teamlinking.chains.UserState
-import com.teamlinking.chains.common.Constans
+import com.teamlinking.chains.common.Constants
 import com.teamlinking.chains.domain.StoryService
 import me.chanjar.weixin.common.exception.WxErrorException
 import me.chanjar.weixin.common.session.WxSessionManager
@@ -27,45 +27,45 @@ class MenuCommandClickEventService implements WxMpMessageHandler{
         if (userState.command){
             //如果在流程命令中,不能菜单执行命令
             switch (userState.command){
-                case Constans.WechatCommand.story_image_add.key:
-                    content = String.format(Constans.WECHAT_MSG_ADD_STORY_IMAGE, currentStory.title)
+                case Constants.WechatCommand.story_image_add.key:
+                    content = String.format(Constants.WECHAT_MSG_ADD_STORY_IMAGE, currentStory.title)
                     break
             }
         }
         if (content == null) {
             switch (wxMessage.eventKey) {
-                case Constans.WechatMenu.updateStory.key:
-                    userState.command = Constans.WechatCommand.story_upate.key
+                case Constants.WechatMenu.updateStory.key:
+                    userState.command = Constants.WechatCommand.story_upate.key
                     userState.lastUpdated = new Date()
                     userState.save(flush: true, failOnError: true)
-                    content = String.format(Constans.WECHAT_MSG_UPDATE_STORY_BEFORE, currentStory.title)
+                    content = String.format(Constants.WECHAT_MSG_UPDATE_STORY_BEFORE, currentStory.title)
                     break
-                case Constans.WechatMenu.addStory.key:
-                    userState.command = Constans.WechatCommand.story_add.key
+                case Constants.WechatMenu.addStory.key:
+                    userState.command = Constants.WechatCommand.story_add.key
                     userState.lastUpdated = new Date()
                     userState.save(flush: true, failOnError: true)
-                    content = Constans.WECHAT_MSG_ADD_STORY_BEFORE
+                    content = Constants.WECHAT_MSG_ADD_STORY_BEFORE
                     break
-                case Constans.WechatMenu.addSubStory.key:
-                    userState.command = Constans.WechatCommand.story_sub_add.key
+                case Constants.WechatMenu.addSubStory.key:
+                    userState.command = Constants.WechatCommand.story_sub_add.key
                     userState.lastUpdated = new Date()
                     userState.save(flush: true, failOnError: true)
-                    content = String.format(Constans.WECHAT_MSG_ADD_SUB_STORY_BEFORE, currentStory.title)
+                    content = String.format(Constants.WECHAT_MSG_ADD_SUB_STORY_BEFORE, currentStory.title)
                     break
-                case Constans.WechatMenu.nextStory.key:
+                case Constants.WechatMenu.nextStory.key:
                     Story next = storyService.getNextStory(userState.currentStoryId)
                     if (next) {
                         userState.command = null
                         userState.lastUpdated = new Date()
                         userState.currentStoryId = next.id
                         userState.save(flush: true, failOnError: true)
-                        content = String.format(Constans.WECHAT_MSG_NEXT_STORY, next.title)
+                        content = String.format(Constants.WECHAT_MSG_NEXT_STORY, next.title)
                     } else {
-                        content = String.format(Constans.WECHAT_MSG_NEXT_STORY_FAILE, currentStory.title)
+                        content = String.format(Constants.WECHAT_MSG_NEXT_STORY_FAILE, currentStory.title)
                     }
                     break
-                case Constans.WechatMenu.backParent.key:
-                    content = String.format(Constans.WECHAT_MSG_BACK_PARENT_FAILE, currentStory.title)
+                case Constants.WechatMenu.backParent.key:
+                    content = String.format(Constants.WECHAT_MSG_BACK_PARENT_FAILE, currentStory.title)
                     if (currentStory.parentId > 0) {
                         Story parent = storyService.get(currentStory.parentId)
                         if (parent) {
@@ -73,7 +73,7 @@ class MenuCommandClickEventService implements WxMpMessageHandler{
                             userState.lastUpdated = new Date()
                             userState.currentStoryId = parent.id
                             userState.save(flush: true, failOnError: true)
-                            content = String.format(Constans.WECHAT_MSG_BACK_PARENT, parent.title)
+                            content = String.format(Constants.WECHAT_MSG_BACK_PARENT, parent.title)
                         }
                     }
                     break
