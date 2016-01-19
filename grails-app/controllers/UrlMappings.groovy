@@ -12,6 +12,8 @@ class UrlMappings {
 
         "/api/1.0/qiniu/callback"(controller: 'qiniu', action: 'callback')
 
+        "/1/story/$baseId?"(controller: "story", action: 'index')
+
         "/"(view:"/index")
         "500"(view:'/error')
         "404"(view:'/notFound')

@@ -11,6 +11,7 @@ class StoryController {
 
     def index() {
 
+
     }
 
     def current(){
