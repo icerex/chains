@@ -6,6 +6,7 @@ import com.teamlinking.chains.UserState
 import com.teamlinking.chains.WechatMessage
 import com.teamlinking.chains.common.Constans
 import com.teamlinking.chains.common.Constans.NodeType
+import com.teamlinking.chains.domain.StoryService
 import grails.transaction.Transactional
 import me.chanjar.weixin.common.api.WxConsts
 import me.chanjar.weixin.common.exception.WxErrorException
@@ -20,6 +21,8 @@ import me.chanjar.weixin.mp.bean.WxMpXmlOutMessage
  */
 class UndoCommandEventService implements WxMpMessageHandler{
 
+    StoryService storyService
+
     @Override
     @Transactional
     WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage, Map<String, Object> context, WxMpService wxMpService, WxSessionManager sessionManager) throws WxErrorException {
@@ -33,6 +36,12 @@ class UndoCommandEventService implements WxMpMessageHandler{
                     currentStory.status = 0 as Byte
                     currentStory.lastUpdated = new Date()
                     currentStory.save()
+
+                    if (currentStory.parentId != 0){
+                        userState.currentStoryId = currentStory.parentId
+                    }else {
+                        userState.currentStoryId = storyService.getNextStory(currentStory.id).id
+                    }
                     cleanState(userState)
                     content = String.format(Constans.WECHAT_MSG_UNDO_STORY_SUCCESS, currentStory.title)
                     break
@@ -43,17 +52,18 @@ class UndoCommandEventService implements WxMpMessageHandler{
                     content = Constans.WECHAT_MSG_UNDO_SUCCESS
             }
         }else {
-            content = Constans.WECHAT_MSG_UNDO_FAILE
             //撤销消息
-            WechatMessage.findAllByUid(userState.uid,[max: 1, sort: "dateCreated", order: "desc"]).each {
-                Node node = Node.get(it.nodeId)
+            content = Constans.WECHAT_MSG_UNDO_FAILE
+            WechatMessage lastMessage = context.get("lastMessage") as WechatMessage
+            if (lastMessage){
+                Node node = Node.get(lastMessage.nodeId)
                 if (node && node.storyId == userState.currentStoryId){
-                    it.status = 0 as Byte
-                    it.lastUpdated = new Date()
-                    it.save()
+                    lastMessage.status = 0 as Byte
+                    lastMessage.lastUpdated = new Date()
+                    lastMessage.save()
 
                     Constans.NodeType st = Constans.NodeType.pase(node.nodeType)
-                    switch (it.msgType){
+                    switch (lastMessage.msgType){
                         case WxConsts.XML_MSG_TEXT:
                             Constans.NodeType nt = st.pop(Constans.NodeType.text)
                             if (nt){
@@ -72,13 +82,19 @@ class UndoCommandEventService implements WxMpMessageHandler{
                             Constans.NodeType nt = st.pop(Constans.NodeType.audio)
                             if (nt){
                                 node.audioUrl = null
+                                node.audioId = null
+                                node.audioDuration = null
+                                node.audioLoadState = Constans.AvLoadState.empty
                                 popNode(node,nt)
                             }
                             break
                         case WxConsts.XML_MSG_VIDEO:
                             Constans.NodeType nt = st.pop(Constans.NodeType.video)
                             if (nt){
+                                node.videoId = null
                                 node.videoUrl = null
+                                node.videoDuration = null
+                                node.videoLoadState = Constans.AvLoadState.empty
                                 popNode(node,nt)
                             }
                             break

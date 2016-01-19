@@ -69,6 +69,5 @@ class MessageRouterService implements InitializingBean {
 
         wxMpMessageRouter = wxMpMessageRouter.rule().msgType(WxConsts.XML_MSG_LOCATION).handler(messageLocationHandlerService).interceptor(dataInterceptorService).end()
 
-
     }
 }

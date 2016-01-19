@@ -28,7 +28,7 @@ class MenuCommandClickEventService implements WxMpMessageHandler{
             //如果在流程命令中,不能菜单执行命令
             switch (userState.command){
                 case Constans.WechatCommand.story_image_add.key:
-                    content = String.format(Constans.WECHAT_MSG_ADD_STORY_IMAGE_FAILE, currentStory.title)
+                    content = String.format(Constans.WECHAT_MSG_ADD_STORY_IMAGE, currentStory.title)
                     break
             }
         }
