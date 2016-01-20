@@ -12,6 +12,7 @@
 </head>
 
 <body>
+    id:${story.id}<br>
     backgroud:${story.pic}<br>
     avatar:${user.headImgUrl}<br>
     desc:${desc}<br>

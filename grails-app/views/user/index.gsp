@@ -12,6 +12,7 @@
 </head>
 
 <body>
+id:${user.id}<br>
 avatar:${user.headImgUrl}<br>
 
 </body>
