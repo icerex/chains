@@ -138,6 +138,8 @@ class WechatController {
     }
 
     def createMenu(){
+        String protocol = config.getProperty("protocol")
+        String domain = config.getProperty("domain")
         wxMpService.menuDelete()
         String json = '{' +
                 '  "menu": {' +
@@ -189,12 +191,12 @@ class WechatController {
                 '          {' +
                 '            "type": "view",' +
                 '            "name": "当前主题",' +
-                '            "url": "http://chains.teamlinking.com/1/story/current"' +
+                '            "url": "'+ protocol + domain +'/1/story/current"' +
                 '          },' +
                 '          {' +
                 '            "type": "view",' +
                 '            "name": "个人中心",' +
-                '            "url": "http://chains.teamlinking.com/1/user/current"' +
+                '            "url": "'+ protocol + domain +'/1/user/current"' +
                 '          }' +
                 '        ]' +
                 '      }' +
