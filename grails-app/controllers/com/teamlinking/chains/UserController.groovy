@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON
 import com.teamlinking.chains.common.Base32Util
 import com.teamlinking.chains.domain.StoryService
 import com.teamlinking.chains.domain.UserService
+import com.teamlinking.chains.vo.StoryVO
 import com.teamlinking.chains.wechat.AuthService
 import org.apache.commons.lang.StringUtils
 
@@ -43,13 +44,16 @@ class UserController {
 
     def story(){
         long id = params.long("id",-1)
-        if (id <= 0){
-            redirect(url: "/error")
-            return
-        }
 
         def result = [:]
-        result.status = 1
+        if (id <= 0){
+            result.status = 0
+            result.msg = "parameter is error"
+        }else {
+            List<StoryVO> storyVOs = storyService.getAll(id)
+            result.status = 1
+            result.data = storyVOs
+        }
 
         withFormat {
             json {

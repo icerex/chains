@@ -1,5 +1,7 @@
 package com.teamlinking.chains.domain
 
+import com.google.common.collect.Lists
+import com.teamlinking.chains.Node
 import com.teamlinking.chains.Story
 import com.teamlinking.chains.User
 import com.teamlinking.chains.UserState
@@ -10,11 +12,60 @@ import org.apache.commons.lang.Validate
 class StoryService {
 
     Story get(long id){
+        Validate.isTrue(id > 0)
         Story.get(id)
     }
 
-    List<StoryVO> getAllStory(long uid){
+    List<StoryVO> getAll(long uid){
+        Validate.isTrue(uid > 0)
+        return findStorys(uid,0L)
+    }
 
+    List<StoryVO> findStorys(long uid,long parentId){
+        List<StoryVO> storyVOs = Lists.newArrayList()
+        Story.findAllByParentIdAndUidAndStatus(parentId,uid,1 as Byte,[sort: "dateCreated", order: "asc"]).each {
+            StoryVO vo = new StoryVO()
+            vo.id = it.id
+            vo.pic = it.pic
+            vo.title = it.title
+            vo.date = getDate(it.id,it.dateCreated,it.lastUpdated)
+            vo.subs = findStorys(uid,it.id)
+            storyVOs << vo
+        }
+        return storyVOs
+    }
+
+    String getDate(long storyId,Date create,Date update){
+        Validate.isTrue(storyId > 0)
+        Validate.notNull(create)
+        Validate.notNull(update)
+        Date start = create
+        Node.findAllByStoryIdAndStatus(storyId,1 as Byte,[max: 1, sort: "nodeTime", order: "asc"]).each {
+            start = it.nodeTime
+        }
+
+        Date end = update
+        Node.findAllByStoryIdAndStatus(storyId,1 as Byte,[max: 1, sort: "nodeTime", order: "desc"]).each {
+            end = it.nodeTime
+        }
+        return dateAndDate(start,end)
+    }
+
+    String dateAndDate(Date start,Date end){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(start);
+        Calendar cal2 = Calendar.getInstance();
+        cal2.setTime(end);
+
+        if (cal.get(Calendar.YEAR) == cal2.get(Calendar.YEAR)){
+            if (cal.get(Calendar.MONTH) == cal2.get(Calendar.MONTH)){
+                return cal.get(Calendar.YEAR)+"年"+(cal.get(Calendar.MONTH)+1)+"月"
+            }else {
+                return (cal.get(Calendar.MONTH)+1)+"月~"+(cal2.get(Calendar.MONTH)+1)+"月"
+            }
+        }else{
+            return cal.get(Calendar.YEAR)+"~"+cal2.get(Calendar.YEAR)
+        }
     }
 
     /**

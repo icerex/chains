@@ -73,29 +73,29 @@ class StoryController {
 
     def node(){
         long id = params.long("id",-1)
-        if (id <= 0){
-            redirect(url: "/error")
-            return
-        }
-        int max = params.int('max', MAX)
-        int offset = params.int('offset', 0)
-        int page = params.int('page', 1)
-        if (page > 1){
-            offset = (page-1) * max
-        }
-
-        String desc = params."desc" as String
-        if (desc == null){
-            desc = "asc"
-        }
-
-        def vo = nodeService.list(id,max,offset,desc)
-
         def result = [:]
-        result.status = 1
-        result.data = vo
-        result.hasNext = vo.count - offset - max > 0
+        if (id <= 0){
+            result.status = 0
+            result.msg = "parameter is error"
+        }else {
+            int max = params.int('max', MAX)
+            int offset = params.int('offset', 0)
+            int page = params.int('page', 1)
+            if (page > 1) {
+                offset = (page - 1) * max
+            }
 
+            String desc = params."desc" as String
+            if (desc == null) {
+                desc = "asc"
+            }
+
+            def vo = nodeService.list(id, max, offset, desc)
+
+            result.status = 1
+            result.data = vo
+            result.hasNext = vo.count - offset - max > 0
+        }
         withFormat {
             json {
                 render text: JSON.toJSONString(result), contentType: 'application/json;', encoding: "UTF-8"

@@ -43,7 +43,7 @@ public interface Constants {
         public static WechatCommand pase(String key){
             if (key != null){
                 for (WechatCommand type : WechatCommand.values()){
-                    if (type.key == key){
+                    if (type.key.equals(key)){
                         return type;
                     }
                 }
