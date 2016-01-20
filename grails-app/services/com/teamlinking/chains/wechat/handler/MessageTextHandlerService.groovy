@@ -22,6 +22,8 @@ class MessageTextHandlerService implements WxMpMessageHandler{
     NodeService nodeService
     WechatMessageService wechatMessageService
 
+    final int TITLE_LENGTH = 10
+
     @Override
     WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage, Map<String, Object> context, WxMpService wxMpService, WxSessionManager sessionManager) throws WxErrorException {
         Story currentStory = context.get("currentStory") as Story
@@ -31,7 +33,7 @@ class MessageTextHandlerService implements WxMpMessageHandler{
             //执行命令
             switch (userState.command){
                 case Constants.WechatCommand.story_add.key:
-                    if (CommonUtil.length(wxMessage.content) > 10){
+                    if (CommonUtil.length(wxMessage.content) > TITLE_LENGTH){
                         content = Constants.WECHAT_MSG_ADD_STORY_TEXT_LENGTH
                     }else {
                         Story story = new Story(
@@ -49,7 +51,7 @@ class MessageTextHandlerService implements WxMpMessageHandler{
                     }
                     break
                 case Constants.WechatCommand.story_sub_add.key:
-                    if (CommonUtil.length(wxMessage.content) > 10){
+                    if (CommonUtil.length(wxMessage.content) > TITLE_LENGTH){
                         content = Constants.WECHAT_MSG_ADD_STORY_TEXT_LENGTH
                     }else {
                         Story story = new Story(
@@ -68,7 +70,7 @@ class MessageTextHandlerService implements WxMpMessageHandler{
                     }
                     break
                 case Constants.WechatCommand.story_upate.key:
-                    if (CommonUtil.length(wxMessage.content) > 10){
+                    if (CommonUtil.length(wxMessage.content) > TITLE_LENGTH){
                         content = Constants.WECHAT_MSG_ADD_STORY_TEXT_LENGTH
                     }else {
                         currentStory.title = wxMessage.content

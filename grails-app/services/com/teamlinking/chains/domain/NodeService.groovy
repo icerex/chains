@@ -24,6 +24,8 @@ class NodeService {
             BeanUtils.copyProperties(it,node)
             list << node
         }
+        //todo 加上子主题
+
         PageVO<NodeVO> page = new PageVO<NodeVO>()
         page.count = all.totalCount
         page.result = list
