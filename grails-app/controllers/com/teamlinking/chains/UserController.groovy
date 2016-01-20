@@ -50,7 +50,7 @@ class UserController {
             result.status = 0
             result.msg = "parameter is error"
         }else {
-            List<StoryVO> storyVOs = storyService.getAll(id)
+            List<StoryVO> storyVOs = storyService.getAll(id,grailsApplication.config)
             result.status = 1
             result.result = storyVOs
         }
