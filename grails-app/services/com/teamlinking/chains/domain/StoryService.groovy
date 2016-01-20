@@ -33,7 +33,7 @@ class StoryService {
             vo.order = storyVOs.size()
             String protocol = config.getProperty("protocol")
             String domain = config.getProperty("domain")
-            vo.url = protocol+domain+"/1/story/"+Base32Util.deCode32(""+it.id)
+            vo.url = protocol+domain+"/1/story/"+Base32Util.enCode32(""+it.id)
             vo.date = getDate(it.id,it.dateCreated,it.lastUpdated)
             vo.subs = findStorys(uid,it.id,config)
             storyVOs << vo
@@ -89,20 +89,23 @@ class StoryService {
      * 下一个主题,如果是最后一个那下一个为第一个,如果该父主题下只有一个则返回null
      * @param currentId
      */
-    Story getNextStory(long currentId,long parentId){
+    Story getNextStory(long uid,long currentId,long parentId){
+        Validate.isTrue(currentId > 0)
         Story next = null
-        if (parentId == -1){
+        if (parentId == -1L){
             Story story = get(currentId)
             parentId = story.parentId
         }
         Story.createCriteria().list(max: 1) {
             eq("parentId", parentId)
             gt("id", currentId)
+            eq("uid",uid)
+            eq("status",1 as Byte)
         }.each {
             next = it
         }
         if (next == null){
-            Story.findAllByParentId(parentId,[max: 1, sort: "dateCreated", order: "asc"]).each {
+            Story.findAllByParentIdAndStatus(parentId,1 as Byte,[max: 1, sort: "dateCreated", order: "asc"]).each {
                 if (it.id != currentId){
                     next = it
                 }
@@ -116,7 +119,7 @@ class StoryService {
      * @param currentId
      */
     Story getSonStory(long currentId){
-        Story.findAllByParentId(currentId,[max: 1, sort: "dateCreated", order: "asc"]).each {
+        Story.findAllByParentIdAndStatus(currentId,1 as Byte,[max: 1, sort: "dateCreated", order: "asc"]).each {
             return it
         }
         return null
