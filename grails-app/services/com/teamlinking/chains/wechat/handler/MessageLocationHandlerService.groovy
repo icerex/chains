@@ -26,7 +26,7 @@ class MessageLocationHandlerService implements WxMpMessageHandler{
         String content = null
         if (userState.command){
             //如果在执行命令,不能接受地理位置
-            content = String.format(Constants.WECHAT_MSG_NODE_FAILE,Constants.WechatCommand.pase(userState.command))
+            content = String.format(Constants.WECHAT_MSG_NODE_FAILE,Constants.WechatCommand.pase(userState.command).value)
         }else{
             //记录节点
             Node node = nodeService.saveByLocation(userState,wxMessage.locationX,wxMessage.locationY,wxMessage.label)
