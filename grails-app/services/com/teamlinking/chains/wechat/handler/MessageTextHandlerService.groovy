@@ -45,6 +45,7 @@ class MessageTextHandlerService implements WxMpMessageHandler{
                         userState.command = Constants.WechatCommand.story_image_add.key
                         userState.lastUpdated = new Date()
                         userState.save(flush: true, failOnError: true)
+                        content = String.format(Constants.WECHAT_MSG_ADD_STORY_IMAGE, currentStory.title)
                     }
                     break
                 case Constants.WechatCommand.story_sub_add.key:
@@ -63,6 +64,7 @@ class MessageTextHandlerService implements WxMpMessageHandler{
                         userState.command = Constants.WechatCommand.story_image_add.key
                         userState.lastUpdated = new Date()
                         userState.save(flush: true, failOnError: true)
+                        content = String.format(Constants.WECHAT_MSG_ADD_STORY_IMAGE, currentStory.title)
                     }
                     break
                 case Constants.WechatCommand.story_upate.key:
