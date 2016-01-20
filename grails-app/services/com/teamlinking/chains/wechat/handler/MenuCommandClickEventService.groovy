@@ -65,7 +65,7 @@ class MenuCommandClickEventService implements WxMpMessageHandler{
                     }
                     break
                 case Constants.WechatMenu.sonStory.key:
-                    Story son = storyService.getSonStory(currentStory.id)
+                    Story son = storyService.getSonStory(currentStory.uid,currentStory.id)
                     if (son) {
                         userState.command = null
                         userState.lastUpdated = new Date()

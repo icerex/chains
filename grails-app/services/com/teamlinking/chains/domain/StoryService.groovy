@@ -118,8 +118,8 @@ class StoryService {
      * 子主题
      * @param currentId
      */
-    Story getSonStory(long currentId){
-        Story.findAllByParentIdAndStatus(currentId,1 as Byte,[max: 1, sort: "dateCreated", order: "asc"]).each {
+    Story getSonStory(long uid,long currentId){
+        Story.findAllByUidAndParentIdAndStatus(uid,currentId,1 as Byte,[max: 1, sort: "dateCreated", order: "asc"]).each {
             return it
         }
         return null

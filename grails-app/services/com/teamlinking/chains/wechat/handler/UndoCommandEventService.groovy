@@ -40,7 +40,7 @@ class UndoCommandEventService implements WxMpMessageHandler{
                     if (currentStory.parentId != 0){
                         userState.currentStoryId = currentStory.parentId
                     }else {
-                        userState.currentStoryId = storyService.getNextStory(currentStory.id).id
+                        userState.currentStoryId = storyService.getNextStory(currentStory.uid,currentStory.id,currentStory.parentId).id
                     }
                     cleanState(userState)
                     content = String.format(Constants.WECHAT_MSG_UNDO_STORY_SUCCESS, currentStory.title)
