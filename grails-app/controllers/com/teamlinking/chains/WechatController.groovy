@@ -41,7 +41,11 @@ class WechatController {
                     // 明文传输的消息
                     WxMpXmlMessage inMessage = WxMpXmlMessage.fromXml(request.getInputStream())
                     WxMpXmlOutMessage outMessage = messageRouterService.route(inMessage)
-                    result = outMessage.toXml()
+                    if (outMessage) {
+                        result = outMessage.toXml()
+                    }else {
+                        result = ""
+                    }
                 }else if ("aes".equals(encryptType)){
                     // 是aes加密的消息
                     String msgSignature = params."msg_signature" as String
@@ -50,7 +54,11 @@ class WechatController {
                     }else {
                         WxMpXmlMessage inMessage = WxMpXmlMessage.fromEncryptedXml(request.getInputStream(), wxMpConfigStorage, timestamp, nonce, msgSignature)
                         WxMpXmlOutMessage outMessage = messageRouterService.route(inMessage)
-                        result = outMessage.toXml()
+                        if (outMessage) {
+                            result = outMessage.toXml()
+                        }else {
+                            result = ""
+                        }
                     }
                 }else {
                     result = "Non identifiable encryption type"

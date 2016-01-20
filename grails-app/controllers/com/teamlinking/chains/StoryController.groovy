@@ -18,6 +18,8 @@ class StoryController {
     UserService userService
     NodeService nodeService
 
+    final MAX = 20
+
     def index() {
         String baseId = params."baseId" as String
         if (StringUtils.isEmpty(baseId)){
@@ -45,10 +47,14 @@ class StoryController {
             desc = "desc"
         }
 
+        def vo = nodeService.list(id,MAX,0,desc)
+
         render(view: "index", model: [
                 story: story,
                 user: user,
-                desc: desc
+                desc: desc,
+                vo: JSON.toJSONString(vo),
+                hasNext: vo.count - 20 > 0
         ])
     }
 
@@ -71,11 +77,11 @@ class StoryController {
             redirect(url: "/error")
             return
         }
-        int max = params.int('max', 20)
+        int max = params.int('max', MAX)
         int offset = params.int('offset', 0)
         int page = params.int('page', 1)
         if (page > 1){
-            offset = (page-1) * 20
+            offset = (page-1) * max
         }
 
         String desc = params."desc" as String
