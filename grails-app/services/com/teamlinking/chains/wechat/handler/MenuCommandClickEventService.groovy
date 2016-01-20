@@ -64,6 +64,18 @@ class MenuCommandClickEventService implements WxMpMessageHandler{
                         content = String.format(Constants.WECHAT_MSG_NEXT_STORY_FAILE, currentStory.title)
                     }
                     break
+                case Constants.WechatMenu.sonStory.key:
+                    Story son = storyService.getSonStory(currentStory.id)
+                    if (son) {
+                        userState.command = null
+                        userState.lastUpdated = new Date()
+                        userState.currentStoryId = son.id
+                        userState.save(flush: true, failOnError: true)
+                        content = String.format(Constants.WECHAT_MSG_NEXT_STORY, son.title)
+                    } else {
+                        content = String.format(Constants.WECHAT_MSG_NEXT_STORY_FAILE, currentStory.title)
+                    }
+                    break
                 case Constants.WechatMenu.backParent.key:
                     content = String.format(Constants.WECHAT_MSG_BACK_PARENT_FAILE, currentStory.title)
                     if (currentStory.parentId > 0) {

@@ -140,7 +140,7 @@ class WechatController {
                 '    "button": [' +
                 '      {' +
                 '        "type": "click",' +
-                '        "name": "新增",' +
+                '        "name": "编辑",' +
                 '        "sub_button": [' +
                 '          {' +
                 '            "type": "click",' +
@@ -151,13 +151,7 @@ class WechatController {
                 '            "type": "click",' +
                 '            "name": "'+Constants.WechatMenu.addSubStory.value+'",' +
                 '            "key": "'+ Constants.WechatMenu.addSubStory.key + '"' +
-                '          }' +
-                '        ]' +
-                '      },' +
-                '      {' +
-                '        "type": "click",' +
-                '        "name": "编辑",' +
-                '        "sub_button": [' +
+                '          },' +
                 '          {' +
                 '            "type": "click",' +
                 '            "name": "'+Constants.WechatMenu.updateStory.value+'",' +
@@ -165,18 +159,29 @@ class WechatController {
                 '          },' +
                 '          {' +
                 '            "type": "click",' +
+                '            "name": "'+Constants.WechatMenu.undo.value+'",' +
+                '            "key": "'+ Constants.WechatMenu.undo.key + '"' +
+                '          }' +
+                '        ]' +
+                '      },' +
+                '      {' +
+                '        "type": "click",' +
+                '        "name": "切换",' +
+                '        "sub_button": [' +
+                '          {' +
+                '            "type": "click",' +
                 '            "name": "'+Constants.WechatMenu.nextStory.value+'",' +
                 '            "key": "'+ Constants.WechatMenu.nextStory.key + '"' +
                 '          },' +
                 '          {' +
                 '            "type": "click",' +
-                '            "name": "'+Constants.WechatMenu.backParent.value+'",' +
-                '            "key": "'+ Constants.WechatMenu.backParent.key + '"' +
+                '            "name": "'+Constants.WechatMenu.sonStory.value+'",' +
+                '            "key": "'+ Constants.WechatMenu.sonStory.key + '"' +
                 '          },' +
                 '          {' +
                 '            "type": "click",' +
-                '            "name": "'+Constants.WechatMenu.undo.value+'",' +
-                '            "key": "'+ Constants.WechatMenu.undo.key + '"' +
+                '            "name": "'+Constants.WechatMenu.backParent.value+'",' +
+                '            "key": "'+ Constants.WechatMenu.backParent.key + '"' +
                 '          }' +
                 '        ]' +
                 '      },' +

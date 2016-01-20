@@ -11,7 +11,8 @@ public interface Constants {
         updateStory("UPDATE_STORY","修改主题"),
         addStory("ADD_STORY","新增主题"),
         addSubStory("ADD_SUB_STORY","新增子主题"),
-        nextStory("NEXT_STORY","切换主题"),
+        nextStory("NEXT_STORY","下一个主题"),
+        sonStory("SON_STORY","进入子主题"),
         backParent("BACK_PARENT","回到上级主题"),
         undo("UNDO","撤销操作|消息");
 
