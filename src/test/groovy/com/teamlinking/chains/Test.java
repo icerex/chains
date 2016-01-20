@@ -32,5 +32,7 @@ public class Test {
         System.out.println("---------------------");
 
         System.out.println(Base32Util.enCode32("1"));
+
+        System.out.println(String.format(Constants.WECHAT_MSG_ADD_STORY_IMAGE, "dadf"));
     }
 }
