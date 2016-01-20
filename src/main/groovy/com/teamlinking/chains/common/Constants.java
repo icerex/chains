@@ -117,24 +117,24 @@ public interface Constants {
     String WECHAT_MSGTYPE_TEXT_COMMAND_UNDO = "取消";
 
     /** 微信消息返回 **/
-    String WECHAT_MSG_SUBSCRIBE = "你好!欢迎来到记忆的空间,你可以回复'帮助'两字查看使用说明";
+    String WECHAT_MSG_SUBSCRIBE = "你好!欢迎来到记忆的空间,你可以回复\'帮助\'两字查看使用说明";
     String WECHAT_MSG_CURRENT_STORY = "当前主题:%s";
-    String WECHAT_MSG_NEXT_STORY = "切换完成,当前主题是'%s'";
-    String WECHAT_MSG_NEXT_STORY_FAILE = "没有主题可以切换,当前主题是'%s'";
-    String WECHAT_MSG_BACK_PARENT = "返回上级成功,当前主题是'%s'";
-    String WECHAT_MSG_BACK_PARENT_FAILE = "该主题已经是最上级,当前主题是'%s'";
+    String WECHAT_MSG_NEXT_STORY = "切换完成,当前主题是\'%s\'";
+    String WECHAT_MSG_NEXT_STORY_FAILE = "没有主题可以切换,当前主题是\'%s\'";
+    String WECHAT_MSG_BACK_PARENT = "返回上级成功,当前主题是\'%s\'";
+    String WECHAT_MSG_BACK_PARENT_FAILE = "该主题已经是最上级,当前主题是\'%s\'";
 
-    String WECHAT_MSG_UPDATE_STORY_BEFORE = "你正在修改主题'%s',回复文字将修改标题(10个中文以内),回复图片将修改主题配图";
-    String WECHAT_MSG_UPDATE_STORY_IMAGE_AFTER = "主题's%'配图修改成功";
+    String WECHAT_MSG_UPDATE_STORY_BEFORE = "你正在修改主题\'%s\',回复文字将修改标题(10个中文以内),回复图片将修改主题配图";
+    String WECHAT_MSG_UPDATE_STORY_IMAGE_AFTER = "主题\'s%\'配图修改成功";
 
     String WECHAT_MSG_ADD_STORY_BEFORE = "请输入标题10个中文以内";
-    String WECHAT_MSG_ADD_SUB_STORY_BEFORE = "你正在主题'%s'中增加子主题,请输入标题10个中文以内";
-    String WECHAT_MSG_ADD_STORY_IMAGE = "请上传主题's%'配图.如你想删除该主题,回复文字'取消'或使用操作菜单中'撤销'按钮";
-    String WECHAT_MSG_ADD_STORY_AFTER = "主题's%'创建成功";
+    String WECHAT_MSG_ADD_SUB_STORY_BEFORE = "你正在主题\'%s\'中增加子主题,请输入标题10个中文以内";
+    String WECHAT_MSG_ADD_STORY_IMAGE = "请上传主题\'s%\'配图.如你想删除该主题,回复文字\'取消\'或使用操作菜单中\'撤销\'按钮";
+    String WECHAT_MSG_ADD_STORY_AFTER = "主题\'s%\'创建成功";
     String WECHAT_MSG_ADD_STORY_TEXT_LENGTH = "超过长度,请输入10个中文以内";
 
     String WECHAT_MSG_UNDO_SUCCESS = "撤销成功";
-    String WECHAT_MSG_UNDO_STORY_SUCCESS = "撤销成功,主题'%s'已删除";
+    String WECHAT_MSG_UNDO_STORY_SUCCESS = "撤销成功,主题\'%s\'已删除";
     String WECHAT_MSG_UNDO_FAILE = "没有能撤销的数据";
 
     String WECHAT_MSG_NODE_IMAGE_SUCCESS = "图片保存成功";

@@ -38,10 +38,8 @@ class NodeService {
         Validate.notEmpty(content)
         Node node = getLastNode(userState.currentStoryId)
         if (node && isTimeable(node.dateCreated)){
-            if (node.content == null){
-                node.content = content
-                return popNode(node,Constants.NodeType.pase(node.nodeType))
-            }
+            // todo 如果是设置节点时间
+
             //是否可用合并
             Constants.NodeType nt = Constants.NodeType.pase(node.nodeType).stack(Constants.NodeType.text)
             if (nt){
@@ -50,6 +48,8 @@ class NodeService {
             }
         }
         Date nodeTime = new Date()
+        // todo 如果是设置节点时间
+
         node = new Node(
                 dateCreated: new Date(),
                 nodeTime: nodeTime,
