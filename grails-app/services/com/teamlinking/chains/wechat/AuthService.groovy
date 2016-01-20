@@ -20,7 +20,7 @@ class AuthService {
         String domain = config.getProperty("domain")
         String state = URIUtil.encodeURIComponent(protocol + domain + request.getRequestURI())
         String redirectUrl = protocol + domain + "/api/1.0/wechat/authback"
-        return wxMpService.oauth2buildAuthorizationUrl(redirectUrl, WxConsts.OAUTH2_SCOPE_USER_INFO, state)
+        return wxMpService.oauth2buildAuthorizationUrl(redirectUrl, WxConsts.OAUTH2_SCOPE_BASE, state)
     }
 
     /**

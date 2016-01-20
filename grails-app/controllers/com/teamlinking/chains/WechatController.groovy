@@ -98,35 +98,26 @@ class WechatController {
             WxMpOAuth2AccessToken wxMpOAuth2AccessToken = wxMpService.oauth2getAccessToken(code)
 
             if (wxMpOAuth2AccessToken) {
-                //获取用户信息
-                WxMpUser wxMpUser = wxMpService.oauth2getUserInfo(wxMpOAuth2AccessToken, null)
-                if (wxMpUser) {
+                //设置cookie
+                Cookie ckOpenId = new Cookie(Constants.WECHAT_OPEN_ID, wxMpOAuth2AccessToken.openId)
+                ckOpenId.setMaxAge(7200)
+                ckOpenId.setPath("/")
+                response.addCookie(ckOpenId)
 
-                    User user = userService.initUser(wxMpUser)
-                    Story story = storyService.initMasterStory(user.id)
-                    userService.initState(user.id,story.id)
+                Cookie ckAccessToken = new Cookie(Constants.WECHAT_ACCESSTOKEN, wxMpOAuth2AccessToken.accessToken);
+                ckAccessToken.setMaxAge(7200)
+                ckAccessToken.setPath("/")
+                response.addCookie(ckAccessToken)
 
-                    //设置cookie
-                    Cookie ckOpenId = new Cookie(Constants.WECHAT_OPEN_ID, wxMpOAuth2AccessToken.openId)
-                    ckOpenId.setMaxAge(7200)
-                    ckOpenId.setPath("/")
-                    response.addCookie(ckOpenId)
+                Cookie ckRefreshToken = new Cookie(Constants.WECHAT_REFRESHTOKEN, wxMpOAuth2AccessToken.refreshToken);
+                ckRefreshToken.setMaxAge(86400000 * 7)
+                ckRefreshToken.setPath("/")
+                response.addCookie(ckRefreshToken)
 
-                    Cookie ckAccessToken = new Cookie(Constants.WECHAT_ACCESSTOKEN, wxMpOAuth2AccessToken.accessToken);
-                    ckAccessToken.setMaxAge(7200)
-                    ckAccessToken.setPath("/")
-                    response.addCookie(ckAccessToken)
-
-                    Cookie ckRefreshToken = new Cookie(Constants.WECHAT_REFRESHTOKEN, wxMpOAuth2AccessToken.refreshToken);
-                    ckRefreshToken.setMaxAge(86400000 * 7)
-                    ckRefreshToken.setPath("/")
-                    response.addCookie(ckRefreshToken)
-
-                    Cookie ckUnionId = new Cookie(Constants.WECHAT_UNION_ID, wxMpOAuth2AccessToken.unionId);
-                    ckUnionId.setMaxAge(86400000 * 7)
-                    ckUnionId.setPath("/")
-                    response.addCookie(ckUnionId)
-                }
+                Cookie ckUnionId = new Cookie(Constants.WECHAT_UNION_ID, wxMpOAuth2AccessToken.unionId);
+                ckUnionId.setMaxAge(86400000 * 7)
+                ckUnionId.setPath("/")
+                response.addCookie(ckUnionId)
             }
         }
 
