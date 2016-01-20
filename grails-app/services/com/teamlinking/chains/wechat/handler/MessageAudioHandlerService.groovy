@@ -23,11 +23,18 @@ class MessageAudioHandlerService implements WxMpMessageHandler{
     @Override
     WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage, Map<String, Object> context, WxMpService wxMpService, WxSessionManager sessionManager) throws WxErrorException {
         UserState userState = context.get("userState") as UserState
-        //记录节点
-        Node node = nodeService.saveByAudio(userState,wxMessage.mediaId)
-        wechatMessageService.insert(userState.uid,node.id,wxMessage)
-        String content = Constants.WECHAT_MSG_NODE_AUDIO_SUCCESS
-        //todo 启动上传任务
+        String content = null
+        if (userState.command){
+            //如果在执行命令,不能接受语音消息
+            content = Constants.WECHAT_MSG_NODE_FAILE
+        }else {
+            //记录节点
+            Node node = nodeService.saveByAudio(userState, wxMessage.mediaId)
+            wechatMessageService.insert(userState.uid, node.id, wxMessage)
+            content = Constants.WECHAT_MSG_NODE_AUDIO_SUCCESS
+
+            //todo 启动上传任务
+        }
 
         return WxMpXmlOutMessage.TEXT().content(content).fromUser(wxMessage.toUserName).toUser(wxMessage.fromUserName).build()
     }

@@ -155,6 +155,7 @@ public interface Constants {
     String WECHAT_MSG_NODE_AUDIO_SUCCESS = "语音保存成功";
     String WECHAT_MSG_NODE_VIDEO_SUCCESS = "视频保存成功";
     String WECHAT_MSG_NODE_LOCATION_SUCCESS = "地理位置设置成功";
+    String WECHAT_MSG_NODE_FAILE = "你正在执行'%s',请先完成流程后再执行,或者回复文字'取消'或使用操作菜单中'撤销'按钮中断流程";
 
 
     //微信用户cookie常量

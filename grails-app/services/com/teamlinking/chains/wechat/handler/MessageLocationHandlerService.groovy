@@ -23,10 +23,16 @@ class MessageLocationHandlerService implements WxMpMessageHandler{
     @Override
     WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage, Map<String, Object> context, WxMpService wxMpService, WxSessionManager sessionManager) throws WxErrorException {
         UserState userState = context.get("userState") as UserState
-        //记录节点
-        Node node = nodeService.saveByLocation(userState,wxMessage.locationX,wxMessage.locationY,wxMessage.label)
-        wechatMessageService.insert(userState.uid,node.id,wxMessage)
-        String content = Constants.WECHAT_MSG_NODE_LOCATION_SUCCESS
+        String content = null
+        if (userState.command){
+            //如果在执行命令,不能接受地理位置
+            content = Constants.WECHAT_MSG_NODE_FAILE
+        }else{
+            //记录节点
+            Node node = nodeService.saveByLocation(userState,wxMessage.locationX,wxMessage.locationY,wxMessage.label)
+            wechatMessageService.insert(userState.uid,node.id,wxMessage)
+            content = Constants.WECHAT_MSG_NODE_LOCATION_SUCCESS
+        }
 
         return WxMpXmlOutMessage.TEXT().content(content).fromUser(wxMessage.toUserName).toUser(wxMessage.fromUserName).build()
     }
