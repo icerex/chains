@@ -119,10 +119,11 @@ class StoryService {
      * @param currentId
      */
     Story getSonStory(long uid,long currentId){
+        Story next = null
         Story.findAllByUidAndParentIdAndStatus(uid,currentId,1 as Byte,[max: 1, sort: "dateCreated", order: "asc"]).each {
-            return it
+            next = it
         }
-        return null
+        return next
     }
 
     /**

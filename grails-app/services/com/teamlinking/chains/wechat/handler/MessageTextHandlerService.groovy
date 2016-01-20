@@ -22,7 +22,7 @@ class MessageTextHandlerService implements WxMpMessageHandler{
     NodeService nodeService
     WechatMessageService wechatMessageService
 
-    final int TITLE_LENGTH = 10
+    final int TITLE_LENGTH = 20
 
     @Override
     WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage, Map<String, Object> context, WxMpService wxMpService, WxSessionManager sessionManager) throws WxErrorException {
