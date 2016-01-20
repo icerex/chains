@@ -141,7 +141,7 @@ class WechatController {
         String protocol = grailsApplication.config.getProperty("protocol")
         String domain = grailsApplication.config.getProperty("domain")
         wxMpService.menuDelete()
-        String json = '{' +
+        String memu = '{' +
                 '  "menu": {' +
                 '    "button": [' +
                 '      {' +
@@ -157,7 +157,7 @@ class WechatController {
                 '            "type": "click",' +
                 '            "name": "'+Constants.WechatMenu.addSubStory.value+'",' +
                 '            "key": "'+ Constants.WechatMenu.addSubStory.key + '"' +
-                '          },' +
+                '          }' +
                 '        ]' +
                 '      },' +
                 '      {' +
@@ -187,6 +187,7 @@ class WechatController {
                 '        ]' +
                 '      },' +
                 '      {' +
+                '        "type": "click",' +
                 '        "name": "查看",' +
                 '        "sub_button": [' +
                 '          {' +
@@ -209,12 +210,13 @@ class WechatController {
                 '    ]' +
                 '  }' +
                 '}'
-        WxMenu wxMenu = WxMenu.fromJson(json)
+        WxMenu wxMenu = WxMenu.fromJson(memu)
         wxMpService.menuCreate(wxMenu)
 
+        def result = "Wechat menu create success!"
         withFormat {
             json {
-                render text: "Wechat menu create success!", contentType: 'application/json;', encoding: "UTF-8"
+                render text: result, contentType: 'application/json;', encoding: "UTF-8"
             }
         }
     }
