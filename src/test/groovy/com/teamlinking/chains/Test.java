@@ -3,6 +3,8 @@ package com.teamlinking.chains;
 import com.teamlinking.chains.common.Base32Util;
 import com.teamlinking.chains.common.Constants;
 
+import java.util.Date;
+
 /**
  * Created by admin on 16/1/15.
  */
@@ -34,5 +36,11 @@ public class Test {
         System.out.println(Base32Util.enCode32("1"));
 
         System.out.println(String.format(Constants.WECHAT_MSG_ADD_STORY_IMAGE, "dadf"));
+
+        System.out.println("---------------------");
+
+        System.out.println((new Date()).getTime() - 1453300479000L < 5*60*1000);
+
+
     }
 }
