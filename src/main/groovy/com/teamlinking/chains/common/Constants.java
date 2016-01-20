@@ -16,8 +16,8 @@ public interface Constants {
         undo("UNDO","撤销操作|消息");
 
 
-        String key;
-        String value;
+        public String key;
+        public String value;
         WechatMenu(String key, String value) {
             this.key = key;
             this.value = value;
@@ -33,8 +33,8 @@ public interface Constants {
         //流程命令
         story_image_add("story_image_add","添加主题配图");
 
-        String key;
-        String value;
+        public String key;
+        public String value;
         WechatCommand(String key, String value) {
             this.key = key;
             this.value = value;
@@ -52,8 +52,8 @@ public interface Constants {
         audioAndPic("图音",24),
         audioAndVideo("音频+视频",48);
 
-        String key;
-        int value;
+        public String key;
+        public int value;
         NodeType(String key, int value) {
             this.key = key;
             this.value = value;
@@ -103,8 +103,8 @@ public interface Constants {
         transcoding("转码中",Byte.valueOf("2")),
         complete("完成",Byte.valueOf("9"));
 
-        String key;
-        Byte value;
+        public String key;
+        public Byte value;
         AvLoadState(String key, Byte value) {
             this.key = key;
             this.value = value;
