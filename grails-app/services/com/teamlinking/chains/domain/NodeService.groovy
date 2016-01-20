@@ -38,9 +38,13 @@ class NodeService {
         Validate.notEmpty(content)
         Node node = getLastNode(userState.currentStoryId)
         if (node && isTimeable(node.dateCreated)){
+            if (node.content == null){
+                node.content = content
+                return popNode(node,Constants.NodeType.pase(node.nodeType))
+            }
             //是否可用合并
             Constants.NodeType nt = Constants.NodeType.pase(node.nodeType).stack(Constants.NodeType.text)
-            if (nt || node.content == null){
+            if (nt){
                 node.content = content
                 return popNode(node,nt)
             }

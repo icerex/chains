@@ -31,6 +31,7 @@ class MessageImageHandlerService implements WxMpMessageHandler{
             switch (userState.command){
                 case Constants.WechatCommand.story_image_add.key:
                     currentStory.pic = wxMessage.picUrl
+                    //todo 要上传
                     currentStory.lastUpdated = new Date()
                     currentStory.save()
                     cleanState(userState)
@@ -38,6 +39,7 @@ class MessageImageHandlerService implements WxMpMessageHandler{
                     break
                 case Constants.WechatCommand.story_upate.key:
                     currentStory.pic = wxMessage.picUrl
+                    //todo 要上传
                     currentStory.lastUpdated = new Date()
                     currentStory.save()
                     cleanState(userState)
