@@ -55,7 +55,7 @@ class WechatController {
                         WxMpXmlMessage inMessage = WxMpXmlMessage.fromEncryptedXml(request.getInputStream(), wxMpConfigStorage, timestamp, nonce, msgSignature)
                         WxMpXmlOutMessage outMessage = messageRouterService.route(inMessage)
                         if (outMessage) {
-                            result = outMessage.toXml()
+                            result = outMessage.toEncryptedXml(wxMpConfigStorage)
                         }else {
                             result = ""
                         }
