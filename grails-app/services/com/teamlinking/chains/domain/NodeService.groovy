@@ -193,7 +193,7 @@ class NodeService {
         return null
     }
 
-    void popNode(Node node, Constants.NodeType nodeType){
+    def popNode(Node node, Constants.NodeType nodeType){
         node.nodeType = nodeType.value
         node.lastUpdated = new Date()
         node.save(flush: true, failOnError: true)

@@ -17,6 +17,10 @@ class UrlMappings {
         "/1/story/current"(controller: "story", action: 'current')
         "/1/story/node.json"(controller: 'story', action: 'node')
 
+        "/1/user/$baseId"(controller: "user", action: 'index')
+        "/1/user/current"(controller: "user", action: 'current')
+        "/1/user/story.json"(controller: "user", action: 'story')
+
         "/"(view:"/index")
         "500"(view:'/error')
         "404"(view:'/notFound')

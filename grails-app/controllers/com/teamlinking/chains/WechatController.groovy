@@ -2,8 +2,6 @@ package com.teamlinking.chains
 
 import com.alibaba.fastjson.JSON
 import com.teamlinking.chains.common.Constants
-import com.teamlinking.chains.domain.StoryService
-import com.teamlinking.chains.domain.UserService
 import com.teamlinking.chains.wechat.MessageRouterService
 import me.chanjar.weixin.common.bean.WxMenu
 import me.chanjar.weixin.mp.api.WxMpConfigStorage

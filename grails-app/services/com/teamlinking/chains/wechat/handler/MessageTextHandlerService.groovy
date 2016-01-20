@@ -76,7 +76,7 @@ class MessageTextHandlerService implements WxMpMessageHandler{
                         userState.command = null
                         userState.lastUpdated = new Date()
                         userState.save(flush: true, failOnError: true)
-                        content = String.format(Constants.WECHAT_MSG_ADD_STORY_IMAGE, currentStory.title)
+                        content = String.format(Constants.WECHAT_MSG_UPDATE_STORY_IMAGE_AFTER, currentStory.title)
                     }
                     break
             }

@@ -7,7 +7,7 @@ public interface Constants {
 
     enum WechatMenu {
 
-        currentStory("CURRENT_STORY","查看主题"),
+        currentStory("CURRENT_STORY","当前状态"),
         updateStory("UPDATE_STORY","修改主题"),
         addStory("ADD_STORY","新增主题"),
         addSubStory("ADD_SUB_STORY","新增子主题"),
@@ -39,6 +39,18 @@ public interface Constants {
             this.key = key;
             this.value = value;
         }
+
+        public static WechatCommand pase(String key){
+            if (key != null){
+                for (WechatCommand type : WechatCommand.values()){
+                    if (type.key == key){
+                        return type;
+                    }
+                }
+            }
+            return null;
+        }
+
     }
 
     enum NodeType{
@@ -118,7 +130,7 @@ public interface Constants {
 
     /** 微信消息返回 **/
     String WECHAT_MSG_SUBSCRIBE = "你好!欢迎来到记忆的空间,你可以回复'帮助'两字查看使用说明";
-    String WECHAT_MSG_CURRENT_STORY = "当前主题:%s";
+    String WECHAT_MSG_CURRENT_STORY = "当前主题:%s\n当前操作:%s";
     String WECHAT_MSG_NEXT_STORY = "切换完成,当前主题是'%s'";
     String WECHAT_MSG_NEXT_STORY_FAILE = "没有主题可以切换,当前主题是'%s'";
     String WECHAT_MSG_BACK_PARENT = "返回上级成功,当前主题是'%s'";
