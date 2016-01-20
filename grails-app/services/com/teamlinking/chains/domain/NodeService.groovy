@@ -40,14 +40,15 @@ class NodeService {
         if (node && isTimeable(node.dateCreated)){
             //是否可用合并
             Constants.NodeType nt = Constants.NodeType.pase(node.nodeType).stack(Constants.NodeType.text)
-            if (nt){
+            if (nt || node.content == null){
                 node.content = content
                 return popNode(node,nt)
             }
         }
+        Date nodeTime = new Date()
         node = new Node(
                 dateCreated: new Date(),
-                nodeTime: new Date(),
+                nodeTime: nodeTime,
                 uid: userState.uid,
                 storyId: userState.currentStoryId,
                 content: content,

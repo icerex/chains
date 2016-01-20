@@ -1,5 +1,6 @@
 package com.teamlinking.chains;
 
+import com.teamlinking.chains.common.Base32Util;
 import com.teamlinking.chains.common.Constants;
 
 /**
@@ -27,5 +28,9 @@ public class Test {
         System.out.println(Constants.NodeType.textAndAudio.pop(Constants.NodeType.textAndPic));
         System.out.println(Constants.NodeType.audioAndVideo.pop(Constants.NodeType.textAndVideo));
         System.out.println(Constants.NodeType.audioAndPic.pop(Constants.NodeType.textAndPic));
+
+        System.out.println("---------------------");
+
+        System.out.println(Base32Util.enCode32("1"));
     }
 }

@@ -34,17 +34,21 @@ class StoryController {
 
         User user = userService.get(story.uid)
 
+        String desc = "asc"
         def cookieMap = authService.readCookieMap(request)
         if (cookieMap.get(Constants.WECHAT_STORY_ID+id) == null){
-            Cookie ckStoryId = new Cookie(Constants.WECHAT_STORY_ID+id, id);
+            Cookie ckStoryId = new Cookie(Constants.WECHAT_STORY_ID+id, ""+id);
             ckStoryId.setMaxAge(86400000 * 7)
             ckStoryId.setPath("/")
             response.addCookie(ckStoryId)
+        }else {
+            desc = "desc"
         }
 
         render(view: "index", model: [
                 story: story,
-                user: user
+                user: user,
+                desc: desc
         ])
     }
 
@@ -69,15 +73,14 @@ class StoryController {
         }
         int max = params.int('max', 20)
         int offset = params.int('offset', 0)
-        int page = params.int('page', 0)
-        if (page > 0){
-            offset = page * 20
+        int page = params.int('page', 1)
+        if (page > 1){
+            offset = (page-1) * 20
         }
-        String desc = "asc"
 
-        def cookieMap = authService.readCookieMap(request)
-        if (cookieMap.get(Constants.WECHAT_STORY_ID+storyId)){
-            desc = "desc"
+        String desc = params."desc" as String
+        if (desc == null){
+            desc = "asc"
         }
 
         def vo = nodeService.list(storyId,max,offset,desc)
