@@ -5,7 +5,9 @@ import com.teamlinking.chains.Node
 import com.teamlinking.chains.Story
 import com.teamlinking.chains.User
 import com.teamlinking.chains.UserState
+import com.teamlinking.chains.common.Base32Util
 import com.teamlinking.chains.vo.StoryVO
+import grails.config.Config
 import org.apache.commons.lang.Validate
 
 
@@ -16,20 +18,24 @@ class StoryService {
         Story.get(id)
     }
 
-    List<StoryVO> getAll(long uid){
+    List<StoryVO> getAll(long uid, Config config){
         Validate.isTrue(uid > 0)
-        return findStorys(uid,0L)
+        return findStorys(uid,0L,config)
     }
 
-    List<StoryVO> findStorys(long uid,long parentId){
+    List<StoryVO> findStorys(long uid,long parentId,Config config){
         List<StoryVO> storyVOs = Lists.newArrayList()
         Story.findAllByParentIdAndUidAndStatus(parentId,uid,1 as Byte,[sort: "dateCreated", order: "asc"]).each {
             StoryVO vo = new StoryVO()
             vo.id = it.id
             vo.pic = it.pic
             vo.title = it.title
+            vo.order = storyVOs.size()
+            String protocol = config.getProperty("protocol")
+            String domain = config.getProperty("domain")
+            vo.url = protocol+domain+"/1/story/"+Base32Util.deCode32(""+it.id)
             vo.date = getDate(it.id,it.dateCreated,it.lastUpdated)
-            vo.subs = findStorys(uid,it.id)
+            vo.subs = findStorys(uid,it.id,config)
             storyVOs << vo
         }
         return storyVOs
@@ -106,15 +112,14 @@ class StoryService {
     }
 
     /**
-     * 下一个主题,如果是最后一个那下一个为第一个,如果该父主题下只有一个则返回null
+     * 子主题
      * @param currentId
      */
     Story getSonStory(long currentId){
-        Story next = null
         Story.findAllByParentId(currentId,[max: 1, sort: "dateCreated", order: "asc"]).each {
-            next = it
+            return it
         }
-        return next
+        return null
     }
 
     /**

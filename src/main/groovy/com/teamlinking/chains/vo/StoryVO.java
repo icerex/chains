@@ -15,6 +15,10 @@ public class StoryVO {
 
     private String pic;
 
+    private int order;
+
+    private String url;
+
     private List<StoryVO> subs;
 
     public String getDate() {
@@ -43,6 +47,22 @@ public class StoryVO {
 
     public String getPic() {
         return pic;
+    }
+
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public void setPic(String pic) {
