@@ -11,7 +11,6 @@ import me.chanjar.weixin.mp.api.WxMpService
 import me.chanjar.weixin.mp.bean.WxMpXmlMessage
 import me.chanjar.weixin.mp.bean.WxMpXmlOutMessage
 import me.chanjar.weixin.mp.bean.result.WxMpOAuth2AccessToken
-import me.chanjar.weixin.mp.bean.result.WxMpUser
 import org.apache.commons.lang.StringUtils
 
 import javax.servlet.http.Cookie
@@ -21,8 +20,6 @@ class WechatController {
     WxMpService wxMpService
     WxMpConfigStorage wxMpConfigStorage
     MessageRouterService messageRouterService
-    UserService userService
-    StoryService storyService
 
     def callback(){
         String signature = params."signature" as String
