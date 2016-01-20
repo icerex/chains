@@ -38,7 +38,6 @@ class MessageTextHandlerService implements WxMpMessageHandler{
                                 dateCreated: new Date(),
                                 lastUpdated: new Date(),
                                 uid: userState.uid,
-                                parentId: currentStory.parentId,
                                 title: wxMessage.content
                         )
                         story = story.save()
@@ -84,7 +83,7 @@ class MessageTextHandlerService implements WxMpMessageHandler{
             //记录节点
             Node node = nodeService.saveByContent(userState,wxMessage.content)
             wechatMessageService.insert(userState.uid,node.id,wxMessage)
-            content = Constants.WECHAT_MSG_NODE_IMAGE_SUCCESS
+            content = Constants.WECHAT_MSG_NODE_TEXT_SUCCESS
         }
 
         return WxMpXmlOutMessage.TEXT().content(content).fromUser(wxMessage.toUserName).toUser(wxMessage.fromUserName).build()

@@ -2,6 +2,7 @@ package com.teamlinking.chains
 
 import com.alibaba.fastjson.JSON
 import com.teamlinking.chains.common.Base32Util
+import com.teamlinking.chains.domain.StoryService
 import com.teamlinking.chains.domain.UserService
 import com.teamlinking.chains.wechat.AuthService
 import org.apache.commons.lang.StringUtils
@@ -10,6 +11,7 @@ class UserController {
 
     AuthService authService
     UserService userService
+    StoryService storyService
 
     def index() {
         String baseId = params."baseId" as String
@@ -40,6 +42,20 @@ class UserController {
     }
 
     def story(){
+        long id = params.long("id",-1)
+        if (id <= 0){
+            redirect(url: "/error")
+            return
+        }
+
+        def result = [:]
+        result.status = 1
+
+        withFormat {
+            json {
+                render text: JSON.toJSONString(result), contentType: 'application/json;', encoding: "UTF-8"
+            }
+        }
 
     }
 }

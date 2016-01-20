@@ -18,8 +18,6 @@ class UserService {
         User.findByOpenId(openId)
     }
 
-
-
     /**
      * 初始化用户数据
      */

@@ -149,6 +149,7 @@ public interface Constants {
     String WECHAT_MSG_UNDO_STORY_SUCCESS = "撤销成功,主题'%s'已删除";
     String WECHAT_MSG_UNDO_FAILE = "没有能撤销的数据";
 
+    String WECHAT_MSG_NODE_TEXT_SUCCESS = "保存成功";
     String WECHAT_MSG_NODE_IMAGE_SUCCESS = "图片保存成功";
     String WECHAT_MSG_NODE_AUDIO_SUCCESS = "语音保存成功";
     String WECHAT_MSG_NODE_VIDEO_SUCCESS = "视频保存成功";

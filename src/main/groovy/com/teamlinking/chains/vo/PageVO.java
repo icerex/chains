@@ -1,4 +1,4 @@
-package com.teamlinking.chains.common;
+package com.teamlinking.chains.vo;
 
 import java.util.List;
 

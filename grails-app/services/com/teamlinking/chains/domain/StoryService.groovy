@@ -3,6 +3,7 @@ package com.teamlinking.chains.domain
 import com.teamlinking.chains.Story
 import com.teamlinking.chains.User
 import com.teamlinking.chains.UserState
+import com.teamlinking.chains.vo.StoryVO
 import org.apache.commons.lang.Validate
 
 
@@ -10,6 +11,10 @@ class StoryService {
 
     Story get(long id){
         Story.get(id)
+    }
+
+    List<StoryVO> getAllStory(long uid){
+
     }
 
     /**

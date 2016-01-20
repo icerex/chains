@@ -72,8 +72,8 @@ class StoryController {
     }
 
     def node(){
-        long storyId = params.long("storyId",-1)
-        if (storyId <= 0){
+        long id = params.long("id",-1)
+        if (id <= 0){
             redirect(url: "/error")
             return
         }
@@ -89,7 +89,7 @@ class StoryController {
             desc = "asc"
         }
 
-        def vo = nodeService.list(storyId,max,offset,desc)
+        def vo = nodeService.list(id,max,offset,desc)
 
         def result = [:]
         result.status = 1

@@ -3,7 +3,7 @@ package com.teamlinking.chains.domain
 import com.google.common.collect.Lists
 import com.teamlinking.chains.UserState
 import com.teamlinking.chains.common.Constants
-import com.teamlinking.chains.common.PageVO
+import com.teamlinking.chains.vo.PageVO
 import com.teamlinking.chains.vo.NodeVO
 import org.apache.commons.lang.Validate
 import com.teamlinking.chains.Node
