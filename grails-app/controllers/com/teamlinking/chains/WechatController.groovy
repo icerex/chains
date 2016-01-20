@@ -138,8 +138,8 @@ class WechatController {
     }
 
     def createMenu(){
-        String protocol = config.getProperty("protocol")
-        String domain = config.getProperty("domain")
+        String protocol = grailsApplication.config.getProperty("protocol")
+        String domain = grailsApplication.config.getProperty("domain")
         wxMpService.menuDelete()
         String json = '{' +
                 '  "menu": {' +
