@@ -88,7 +88,7 @@ class StoryService {
         Story.findAllByParentId(currentId,[max: 1, sort: "dateCreated", order: "asc"]).each {
             next = it
         }
-        if (next) {
+        if (next == null) {
             if (parentId == -1){
                 Story story = get(currentId)
                 parentId = story.parentId
