@@ -146,18 +146,8 @@ class WechatController {
                 '    "button": [' +
                 '      {' +
                 '        "type": "click",' +
-                '        "name": "操作",' +
+                '        "name": "新增",' +
                 '        "sub_button": [' +
-                '          {' +
-                '            "type": "click",' +
-                '            "name": "'+Constants.WechatMenu.currentStory.value+'",' +
-                '            "key": "'+ Constants.WechatMenu.currentStory.key + '"' +
-                '          },' +
-                '          {' +
-                '            "type": "click",' +
-                '            "name": "'+Constants.WechatMenu.updateStory.value+'",' +
-                '            "key": "'+ Constants.WechatMenu.updateStory.key + '"' +
-                '          },' +
                 '          {' +
                 '            "type": "click",' +
                 '            "name": "'+Constants.WechatMenu.addStory.value+'",' +
@@ -167,6 +157,17 @@ class WechatController {
                 '            "type": "click",' +
                 '            "name": "'+Constants.WechatMenu.addSubStory.value+'",' +
                 '            "key": "'+ Constants.WechatMenu.addSubStory.key + '"' +
+                '          },' +
+                '        ]' +
+                '      },' +
+                '      {' +
+                '        "type": "click",' +
+                '        "name": "编辑",' +
+                '        "sub_button": [' +
+                '          {' +
+                '            "type": "click",' +
+                '            "name": "'+Constants.WechatMenu.updateStory.value+'",' +
+                '            "key": "'+ Constants.WechatMenu.updateStory.key + '"' +
                 '          },' +
                 '          {' +
                 '            "type": "click",' +
@@ -188,6 +189,11 @@ class WechatController {
                 '      {' +
                 '        "name": "查看",' +
                 '        "sub_button": [' +
+                '          {' +
+                '            "type": "click",' +
+                '            "name": "'+Constants.WechatMenu.currentStory.value+'",' +
+                '            "key": "'+ Constants.WechatMenu.currentStory.key + '"' +
+                '          },' +
                 '          {' +
                 '            "type": "view",' +
                 '            "name": "当前主题",' +
