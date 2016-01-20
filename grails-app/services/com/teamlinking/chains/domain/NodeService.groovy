@@ -1,11 +1,34 @@
 package com.teamlinking.chains.domain
 
+import com.google.common.collect.Lists
 import com.teamlinking.chains.UserState
 import com.teamlinking.chains.common.Constants
+import com.teamlinking.chains.common.PageVO
+import com.teamlinking.chains.vo.NodeVO
 import org.apache.commons.lang.Validate
 import com.teamlinking.chains.Node
+import org.springframework.beans.BeanUtils
 
 class NodeService {
+
+    PageVO<NodeVO> list(long storyId, int max, int offset, String desc){
+        Validate.isTrue(storyId > 0)
+        def all = Node.createCriteria().list(max: max, offset: offset){
+            eq("status", 1 as Byte)
+            eq("storyId", storyId)
+            order("nodeTime", desc)
+        }
+        List<NodeVO> list = Lists.newArrayList()
+        all.each {
+            NodeVO node = new NodeVO()
+            BeanUtils.copyProperties(it,node)
+            list << node
+        }
+        PageVO<NodeVO> page = new PageVO<NodeVO>()
+        page.count = all.totalCount
+        page.result = list
+        return page
+    }
 
     /**
      * 保存节点,5分钟内可叠加的合并成一个

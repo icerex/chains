@@ -53,7 +53,7 @@ class MenuCommandClickEventService implements WxMpMessageHandler{
                     content = String.format(Constants.WECHAT_MSG_ADD_SUB_STORY_BEFORE, currentStory.title)
                     break
                 case Constants.WechatMenu.nextStory.key:
-                    Story next = storyService.getNextStory(userState.currentStoryId)
+                    Story next = storyService.getNextStory(currentStory.id,currentStory.parentId)
                     if (next) {
                         userState.command = null
                         userState.lastUpdated = new Date()

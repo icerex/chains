@@ -49,6 +49,7 @@ class MessageImageHandlerService implements WxMpMessageHandler{
             Node node = nodeService.saveByImage(userState,wxMessage.picUrl)
             wechatMessageService.insert(userState.uid,node.id,wxMessage)
             content = Constants.WECHAT_MSG_NODE_IMAGE_SUCCESS
+            //todo 启动上传任务
         }
 
         return WxMpXmlOutMessage.TEXT().content(content).fromUser(wxMessage.toUserName).toUser(wxMessage.fromUserName).build()

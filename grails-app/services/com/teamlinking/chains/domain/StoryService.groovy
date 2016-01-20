@@ -24,22 +24,31 @@ class StoryService {
     }
 
     /**
-     * 下一个主题,当前是最后一个下一个为第一个,如果该父主题下只有一个则返回null
+     * 下一个主题,先返回子主题,没有子主题返回当前父主题下的主题,如果是最后一个那下一个为第一个,如果该父主题下只有一个则返回null
      * @param currentId
      */
-    Story getNextStory(long currentId){
-        Story story = get(currentId)
+    Story getNextStory(long currentId,long parentId){
         Story next = null
-        Story.createCriteria().list(max: 1) {
-            eq("parentId",story.parentId)
-            gt("dateCreated", story.dateCreated)
-            gt("id", story.id)
-        }.each {
+        Story.findAllByParentId(currentId,[max: 1, sort: "dateCreated", order: "asc"]).each {
             next = it
         }
-        if (next == null){
-            Story.findAllByParentId(story.parentId,[max: 1, sort: "dateCreated", order: "asc"]).each {
+        if (next) {
+            if (parentId == -1){
+                Story story = get(currentId)
+                parentId = story.parentId
+            }
+            Story.createCriteria().list(max: 1) {
+                eq("parentId", parentId)
+                gt("id", currentId)
+            }.each {
                 next = it
+            }
+        }
+        if (next == null){
+            Story.findAllByParentId(parentId,[max: 1, sort: "dateCreated", order: "asc"]).each {
+                if (it.id != currentId){
+                    next = it
+                }
             }
         }
         return next

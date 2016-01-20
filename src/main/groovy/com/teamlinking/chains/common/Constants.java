@@ -43,12 +43,14 @@ public interface Constants {
 
     enum NodeType{
         text("文字",1),
-        pic("图片",2),
-        audio("音频",4),
-        video("视频",8),
-        textAndPic("图文",3),
-        textAndAudio("文字+音频",5),
-        textAndVideo("文字+视频",9);
+        pic("图片",8),
+        audio("音频",16),
+        video("视频",32),
+        textAndPic("图文",9),
+        textAndAudio("文字+音频",17),
+        textAndVideo("文字+视频",33),
+        audioAndPic("图音",24),
+        audioAndVideo("音频+视频",48);
 
         String key;
         int value;
@@ -75,7 +77,8 @@ public interface Constants {
          * @return
          */
         public NodeType pop(NodeType nt){
-            if ((this == textAndPic || this == textAndAudio || this == textAndVideo)
+            if ((this == textAndPic || this == textAndAudio || this == textAndVideo
+                    || this == audioAndPic || this == audioAndVideo)
                     && (nt == text || nt == pic || nt == audio || nt == video)){
                 return pase(this.value & nt.value);
             }
@@ -145,5 +148,6 @@ public interface Constants {
     String WECHAT_ACCESSTOKEN = "WECHAT_ACCESSTOKEN";
     String WECHAT_REFRESHTOKEN = "WECHAT_REFRESHTOKEN";
     String WECHAT_UNION_ID = "WECHAT_UNION_ID";
+    String WECHAT_STORY_ID = "WECHAT_STORY_ID";
 
 }

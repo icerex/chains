@@ -2,19 +2,27 @@ package com.teamlinking.chains
 
 import com.alibaba.fastjson.JSON
 import com.teamlinking.chains.common.Constants
+import com.teamlinking.chains.domain.StoryService
+import com.teamlinking.chains.domain.UserService
 import com.teamlinking.chains.wechat.MessageRouterService
 import me.chanjar.weixin.common.bean.WxMenu
 import me.chanjar.weixin.mp.api.WxMpConfigStorage
 import me.chanjar.weixin.mp.api.WxMpService
 import me.chanjar.weixin.mp.bean.WxMpXmlMessage
 import me.chanjar.weixin.mp.bean.WxMpXmlOutMessage
+import me.chanjar.weixin.mp.bean.result.WxMpOAuth2AccessToken
+import me.chanjar.weixin.mp.bean.result.WxMpUser
 import org.apache.commons.lang.StringUtils
+
+import javax.servlet.http.Cookie
 
 class WechatController {
 
     WxMpService wxMpService
     WxMpConfigStorage wxMpConfigStorage
     MessageRouterService messageRouterService
+    UserService userService
+    StoryService storyService
 
     def callback(){
         String signature = params."signature" as String
@@ -79,6 +87,53 @@ class WechatController {
             json {
                 render text: JSON.toJSONString(result), contentType: 'application/json;', encoding: "UTF-8"
             }
+        }
+    }
+
+    def authback(){
+        String code = params."code" as String
+        String state = params."state" as String
+        if (code) {
+            //获取access token
+            WxMpOAuth2AccessToken wxMpOAuth2AccessToken = wxMpService.oauth2getAccessToken(code)
+
+            if (wxMpOAuth2AccessToken) {
+                //获取用户信息
+                WxMpUser wxMpUser = wxMpService.oauth2getUserInfo(wxMpOAuth2AccessToken, null)
+                if (wxMpUser) {
+
+                    User user = userService.initUser(wxMpUser)
+                    Story story = storyService.initMasterStory(user.id)
+                    userService.initState(user.id,story.id)
+
+                    //设置cookie
+                    Cookie ckOpenId = new Cookie(Constants.WECHAT_OPEN_ID, wxMpOAuth2AccessToken.openId)
+                    ckOpenId.setMaxAge(7200)
+                    ckOpenId.setPath("/")
+                    response.addCookie(ckOpenId)
+
+                    Cookie ckAccessToken = new Cookie(Constants.WECHAT_ACCESSTOKEN, wxMpOAuth2AccessToken.accessToken);
+                    ckAccessToken.setMaxAge(7200)
+                    ckAccessToken.setPath("/")
+                    response.addCookie(ckAccessToken)
+
+                    Cookie ckRefreshToken = new Cookie(Constants.WECHAT_REFRESHTOKEN, wxMpOAuth2AccessToken.refreshToken);
+                    ckRefreshToken.setMaxAge(86400000 * 7)
+                    ckRefreshToken.setPath("/")
+                    response.addCookie(ckRefreshToken)
+
+                    Cookie ckUnionId = new Cookie(Constants.WECHAT_UNION_ID, wxMpOAuth2AccessToken.unionId);
+                    ckUnionId.setMaxAge(86400000 * 7)
+                    ckUnionId.setPath("/")
+                    response.addCookie(ckUnionId)
+                }
+            }
+        }
+
+        if (state) {
+            redirect(url: state)
+        }else {
+            redirect(url: "/error")
         }
     }
 
