@@ -52,7 +52,7 @@ class UserController {
         }else {
             List<StoryVO> storyVOs = storyService.getAll(id)
             result.status = 1
-            result.data = storyVOs
+            result.result = storyVOs
         }
 
         withFormat {
