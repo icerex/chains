@@ -40,7 +40,8 @@ class MessageTextHandlerService implements WxMpMessageHandler{
                                 dateCreated: new Date(),
                                 lastUpdated: new Date(),
                                 uid: userState.uid,
-                                title: wxMessage.content
+                                title: wxMessage.content,
+                                pic: Constants.DEFAULT_STORY_BACK_GROUND
                         )
                         story = story.save()
                         userState.currentStoryId = story.id
@@ -59,7 +60,8 @@ class MessageTextHandlerService implements WxMpMessageHandler{
                                 lastUpdated: new Date(),
                                 uid: userState.uid,
                                 parentId: currentStory.id,
-                                title: wxMessage.content
+                                title: wxMessage.content,
+                                pic: Constants.DEFAULT_STORY_BACK_GROUND
                         )
                         story = story.save()
                         userState.currentStoryId = story.id
