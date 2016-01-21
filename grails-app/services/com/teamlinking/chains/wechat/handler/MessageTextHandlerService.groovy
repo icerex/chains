@@ -82,6 +82,8 @@ class MessageTextHandlerService implements WxMpMessageHandler{
                         content = String.format(Constants.WECHAT_MSG_UPDATE_STORY_IMAGE_AFTER, currentStory.title)
                     }
                     break
+                default:
+                    content = String.format(Constants.WECHAT_MSG_NODE_FAILE,Constants.WechatCommand.pase(userState.command).value)
             }
         }else{
             //记录节点
