@@ -257,10 +257,11 @@ class NodeService {
      * @return
      */
     Node getLastNode(long storyId){
+        Node node = null
         Node.findAllByStoryIdAndStatus(storyId,1 as Byte,[max: 1, sort: "dateCreated", order: "desc"]).each {
-            return it
+            node = it
         }
-        return null
+        return node
     }
 
     def popNode(Node node, Constants.NodeType nodeType){
