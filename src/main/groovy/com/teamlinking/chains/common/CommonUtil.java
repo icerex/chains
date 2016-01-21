@@ -1,5 +1,10 @@
 package com.teamlinking.chains.common;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Created by admin on 16/1/19.
  */
@@ -27,5 +32,66 @@ public class CommonUtil {
             }
         }
         return valueLength;
+    }
+
+    /**
+     * 匹配日期,格式#2013-01-30#,#2013年01月31日#
+     * @param str
+     * @return
+     */
+    public static Date matcherDate(String str){
+        String dataStr = matcherGroup(str,Constants.DATE_SET_EL);
+        while(dataStr != null){
+            dataStr = dataStr.replaceAll("#","");
+            try{
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                Date date = format.parse(dataStr);
+                if (date != null){
+                    return date;
+                }
+            }catch (Exception e){
+                try{
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
+                    Date date = format.parse(dataStr);
+                    if (date != null){
+                        return date;
+                    }
+                }catch (Exception e2){
+                    try{
+                        SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月");
+                        Date date = format.parse(dataStr);
+                        if (date != null){
+                            return date;
+                        }
+                    }catch (Exception e3){
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 获取匹配的字符串
+     * @param str
+     * @param el
+     * @return
+     */
+    public static String matcherGroup(String str,String el){
+        Pattern p = Pattern.compile(el);
+        Matcher m = p.matcher(str);
+        while(m.find()){
+            return m.group();
+        }
+        return null;
+    }
+
+    /**
+     * 5分钟内可用
+     * @param date
+     * @return
+     */
+    public static boolean isFiveMinuteable(Date date){
+        return (new Date()).getTime() - date.getTime() < 5*60*1000;
     }
 }

@@ -4,6 +4,7 @@ import com.google.common.collect.Lists
 import com.teamlinking.chains.Story
 import com.teamlinking.chains.UserState
 import com.teamlinking.chains.common.Base32Util
+import com.teamlinking.chains.common.CommonUtil
 import com.teamlinking.chains.common.Constants
 import com.teamlinking.chains.vo.PageVO
 import com.teamlinking.chains.vo.StoryNodeVO
@@ -92,6 +93,11 @@ class NodeService {
         return page
     }
 
+    /**
+     * 获取图片集合
+     * @param storyId
+     * @return
+     */
     List<String> getPics(long storyId){
         List<String> list = Lists.newArrayList()
         Node.findAllByStoryIdAndStatusAndPicUrlIsNotNull(storyId,1 as Byte,[max: 9, sort: "dateCreated", order: "desc"]).each {
@@ -101,15 +107,30 @@ class NodeService {
     }
 
     /**
+     * 设置节点时间,5分钟内
+     * @param userState
+     * @param date
+     * @return
+     */
+    Node setNodeTime(UserState userState,Date date){
+        Validate.notNull(userState)
+        Validate.notEmpty(date)
+        Node node = getLastNode(userState.currentStoryId)
+        if (node && CommonUtil.isFiveMinuteable(node.dateCreated)){
+            node.nodeTime = date
+            return popNode(node,Constants.NodeType.pase(node.nodeType))
+        }
+        return node
+    }
+
+    /**
      * 保存节点,5分钟内可叠加的合并成一个
      */
     Node saveByContent(UserState userState, String content) {
         Validate.notNull(userState)
         Validate.notEmpty(content)
         Node node = getLastNode(userState.currentStoryId)
-        if (node && isTimeable(node.dateCreated)){
-            // todo 如果是设置节点时间
-
+        if (node && CommonUtil.isFiveMinuteable(node.dateCreated)){
             //是否可用合并
             Constants.NodeType nt = Constants.NodeType.pase(node.nodeType).stack(Constants.NodeType.text)
             if (nt){
@@ -117,12 +138,9 @@ class NodeService {
                 return popNode(node,nt)
             }
         }
-        Date nodeTime = new Date()
-        // todo 如果是设置节点时间
-
         node = new Node(
                 dateCreated: new Date(),
-                nodeTime: nodeTime,
+                nodeTime: new Date(),
                 uid: userState.uid,
                 storyId: userState.currentStoryId,
                 content: content,
@@ -139,7 +157,7 @@ class NodeService {
         Validate.notNull(userState)
         Validate.notEmpty(picUrl)
         Node node = getLastNode(userState.currentStoryId)
-        if (node && isTimeable(node.dateCreated)){
+        if (node && CommonUtil.isFiveMinuteable(node.dateCreated)){
             //是否可用合并
             Constants.NodeType nt = Constants.NodeType.pase(node.nodeType).stack(Constants.NodeType.pic)
             if (nt){
@@ -166,7 +184,7 @@ class NodeService {
         Validate.notNull(userState)
         Validate.notEmpty(mediaId)
         Node node = getLastNode(userState.currentStoryId)
-        if (node && isTimeable(node.dateCreated)){
+        if (node && CommonUtil.isFiveMinuteable(node.dateCreated)){
             //是否可用合并
             Constants.NodeType nt = Constants.NodeType.pase(node.nodeType).stack(Constants.NodeType.audio)
             if (nt){
@@ -195,7 +213,7 @@ class NodeService {
         Validate.notNull(userState)
         Validate.notEmpty(mediaId)
         Node node = getLastNode(userState.currentStoryId)
-        if (node && isTimeable(node.dateCreated)){
+        if (node && CommonUtil.isFiveMinuteable(node.dateCreated)){
             //是否可用合并
             Constants.NodeType nt = Constants.NodeType.pase(node.nodeType).stack(Constants.NodeType.video)
             if (nt){
@@ -227,7 +245,7 @@ class NodeService {
         Validate.notEmpty(locationLab)
 
         Node node = getLastNode(userState.currentStoryId)
-        if (node && isTimeable(node.dateCreated)){
+        if (node && CommonUtil.isFiveMinuteable(node.dateCreated)){
             //是否可用合并
             if (node.locationLab == null){
                 node.locationLab = locationLab
@@ -268,9 +286,5 @@ class NodeService {
         node.nodeType = nodeType.value
         node.lastUpdated = new Date()
         node.save(flush: true, failOnError: true)
-    }
-
-    boolean isTimeable(Date date){
-        return (new Date()).getTime() - date.getTime() < 5*60*1000
     }
 }

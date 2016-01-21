@@ -127,6 +127,8 @@ public interface Constants {
 
     String ENCODE_32_SALT = "8esflhw9y2435kcr6xqinojzm7pgd1tv";
 
+    String DATE_SET_EL = "^#\\d{4}.*#$";
+
     String WECHAT_MSGTYPE_TEXT_COMMAND_UNDO = "取消";
 
     /** 微信消息返回 **/
@@ -157,6 +159,8 @@ public interface Constants {
     String WECHAT_MSG_NODE_LOCATION_SUCCESS = "地理位置设置成功";
     String WECHAT_MSG_NODE_FAILE = "你正在执行'%s',请先完成流程后再执行,或者回复文字'取消'或使用操作菜单中'撤销'按钮中断流程";
 
+    String WECHAT_MSG_NODE_DATE_FAILE = "没有可操作的数据";
+    String WECHAT_MSG_NODE_DATE_SUCCESS = "时间设置成功";
 
     //微信用户cookie常量
     String WECHAT_OPEN_ID = "WECHAT_OPEN_ID";

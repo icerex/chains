@@ -1,9 +1,13 @@
 package com.teamlinking.chains;
 
 import com.teamlinking.chains.common.Base32Util;
+import com.teamlinking.chains.common.CommonUtil;
 import com.teamlinking.chains.common.Constants;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by admin on 16/1/15.
@@ -39,7 +43,10 @@ public class Test {
 
         System.out.println("---------------------");
 
-        System.out.println((new Date()).getTime() - 1453300479000L < 5*60*1000);
+        System.out.println("date:"+CommonUtil.matcherDate("#2013-01-31#asdfasdfsadfas撒地方"));
+        System.out.println("date:"+CommonUtil.matcherDate("#2013-01-31#"));
+        System.out.println("date:"+CommonUtil.matcherDate("#2013年1月31日#"));
+        System.out.println("date:"+CommonUtil.matcherDate("#2013年1月#"));
 
 
     }

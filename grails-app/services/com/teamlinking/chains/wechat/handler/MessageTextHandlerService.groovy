@@ -86,10 +86,20 @@ class MessageTextHandlerService implements WxMpMessageHandler{
                     content = String.format(Constants.WECHAT_MSG_NODE_FAILE,Constants.WechatCommand.pase(userState.command).value)
             }
         }else{
-            //记录节点
-            Node node = nodeService.saveByContent(userState,wxMessage.content)
-            wechatMessageService.insert(userState.uid,node.id,wxMessage)
-            content = Constants.WECHAT_MSG_NODE_TEXT_SUCCESS
+            if (CommonUtil.matcherGroup(wxMessage.content,Constants.DATE_SET_EL)){
+                //设置节点时间
+                Node node = nodeService.setNodeTime(userState,wxMessage.content)
+                if (node) {
+                    content = Constants.WECHAT_MSG_NODE_DATE_SUCCESS
+                }else {
+                    content = Constants.WECHAT_MSG_NODE_DATE_FAILE
+                }
+            }else {
+                //记录节点
+                Node node = nodeService.saveByContent(userState, wxMessage.content)
+                wechatMessageService.insert(userState.uid, node.id, wxMessage)
+                content = Constants.WECHAT_MSG_NODE_TEXT_SUCCESS
+            }
         }
 
         return WxMpXmlOutMessage.TEXT().content(content).fromUser(wxMessage.toUserName).toUser(wxMessage.fromUserName).build()
