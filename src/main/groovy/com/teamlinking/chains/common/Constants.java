@@ -159,7 +159,8 @@ public interface Constants {
     String WECHAT_MSG_NODE_LOCATION_SUCCESS = "地理位置设置成功";
     String WECHAT_MSG_NODE_FAILE = "你正在执行'%s',请先完成流程后再执行,或者回复文字'取消'或使用操作菜单中'撤销'按钮中断流程";
 
-    String WECHAT_MSG_NODE_DATE_FAILE = "没有可操作的数据";
+    String WECHAT_MSG_NODE_NO_DATA_FAILE = "没有可操作的数据";
+    String WECHAT_MSG_NODE_DATE_FAILE = "时间格式错误,请按住下列格式设置:\n#2016-01-23#\n或\n#2016年1月23号#";
     String WECHAT_MSG_NODE_DATE_SUCCESS = "时间设置成功";
 
     //微信用户cookie常量

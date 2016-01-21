@@ -87,13 +87,19 @@ class MessageTextHandlerService implements WxMpMessageHandler{
             }
         }else{
             if (CommonUtil.matcherGroup(wxMessage.content,Constants.DATE_SET_EL)){
-                //设置节点时间
-                Node node = nodeService.setNodeTime(userState,wxMessage.content)
-                if (node) {
-                    content = Constants.WECHAT_MSG_NODE_DATE_SUCCESS
+                Date date = CommonUtil.matcherDate(wxMessage.content)
+                if (date){
+                    //设置节点时间
+                    Node node = nodeService.setNodeTime(userState,date)
+                    if (node) {
+                        content = Constants.WECHAT_MSG_NODE_DATE_SUCCESS
+                    }else {
+                        content = Constants.WECHAT_MSG_NODE_NO_DATA_FAILE
+                    }
                 }else {
                     content = Constants.WECHAT_MSG_NODE_DATE_FAILE
                 }
+
             }else {
                 //记录节点
                 Node node = nodeService.saveByContent(userState, wxMessage.content)
