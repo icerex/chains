@@ -47,7 +47,7 @@ class StoryController {
             desc = "desc"
         }
 
-        def vo = nodeService.list(id,MAX,0,desc)
+        def vo = nodeService.list(id,MAX,0,desc,grailsApplication.config)
 
         render(view: "index", model: [
                 story: story,
@@ -90,7 +90,7 @@ class StoryController {
                 desc = "asc"
             }
 
-            def vo = nodeService.list(id, max, offset, desc)
+            def vo = nodeService.list(id, max, offset, desc,grailsApplication.config)
 
             result.status = 1
             result.data = vo

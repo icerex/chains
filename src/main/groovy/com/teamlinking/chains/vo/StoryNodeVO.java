@@ -1,12 +1,15 @@
 package com.teamlinking.chains.vo;
 
+import com.google.common.collect.Lists;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by admin on 16/1/20.
  */
-public class NodeVO {
+public class StoryNodeVO {
 
     private Long id;
 
@@ -15,8 +18,6 @@ public class NodeVO {
     private Integer nodeType;
 
     private String content;
-
-    private String picUrl;
     //音频id
     private String audioId;
     //音频地址
@@ -39,6 +40,12 @@ public class NodeVO {
     private Double latitude;
     //经度
     private Double longitude;
+    //多图的情况
+    private List<String> pics = Lists.newArrayList();
+    //是否是子主题
+    private boolean isSub = false;
+    //子主题Url
+    private String subUrl;
 
     public String getNodeTimeStr(){
         if (nodeTime == null){
@@ -78,14 +85,6 @@ public class NodeVO {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public String getPicUrl() {
-        return picUrl;
-    }
-
-    public void setPicUrl(String picUrl) {
-        this.picUrl = picUrl;
     }
 
     public String getAudioId() {
@@ -174,5 +173,29 @@ public class NodeVO {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    public List<String> getPics() {
+        return pics;
+    }
+
+    public void setPics(List<String> pics) {
+        this.pics = pics;
+    }
+
+    public boolean isSub() {
+        return isSub;
+    }
+
+    public void setSub(boolean sub) {
+        isSub = sub;
+    }
+
+    public String getSubUrl() {
+        return subUrl;
+    }
+
+    public void setSubUrl(String subUrl) {
+        this.subUrl = subUrl;
     }
 }

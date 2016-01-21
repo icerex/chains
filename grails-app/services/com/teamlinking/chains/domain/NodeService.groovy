@@ -1,35 +1,103 @@
 package com.teamlinking.chains.domain
 
 import com.google.common.collect.Lists
+import com.teamlinking.chains.Story
 import com.teamlinking.chains.UserState
+import com.teamlinking.chains.common.Base32Util
 import com.teamlinking.chains.common.Constants
 import com.teamlinking.chains.vo.PageVO
-import com.teamlinking.chains.vo.NodeVO
+import com.teamlinking.chains.vo.StoryNodeVO
+import grails.config.Config
 import org.apache.commons.lang.Validate
 import com.teamlinking.chains.Node
 import org.springframework.beans.BeanUtils
 
 class NodeService {
 
-    PageVO<NodeVO> list(long storyId, int max, int offset, String desc){
+    /**
+     * 分页获取
+     * @param storyId
+     * @param max
+     * @param offset
+     * @param desc
+     * @param config
+     * @return
+     */
+    PageVO<StoryNodeVO> list(long storyId, int max, int offset, String desc, Config config){
         Validate.isTrue(storyId > 0)
-        def all = Node.createCriteria().list(max: max, offset: offset){
+        List<Node> all = Node.createCriteria().list(max: max, offset: offset){
             eq("status", 1 as Byte)
             eq("storyId", storyId)
             order("nodeTime", desc)
         }
-        List<NodeVO> list = Lists.newArrayList()
-        all.each {
-            NodeVO node = new NodeVO()
-            BeanUtils.copyProperties(it,node)
-            list << node
-        }
-        //todo 加上子主题
 
-        PageVO<NodeVO> page = new PageVO<NodeVO>()
+        Date end = null
+
+        List<StoryNodeVO> list = Lists.newArrayList()
+        all.each {
+            StoryNodeVO node = new StoryNodeVO()
+            BeanUtils.copyProperties(it,node)
+            node.pics << it.picUrl
+            list << node
+
+            end = it.nodeTime
+        }
+        String protocol = config.getProperty("protocol")
+        String domain = config.getProperty("domain")
+        //加上子主题
+        List<Story> stories = Story.createCriteria().list(){
+            eq("status", 1 as Byte)
+            eq("parentId", storyId)
+            if (end) {
+                if ("asc".equals(desc)) {
+                    ge("dateCreated", end)
+                } else {
+                    gt("dateCreated", end)
+                }
+            }
+            order("dateCreated", desc)
+        }
+        stories.each {
+            StoryNodeVO node = new StoryNodeVO()
+            node.setSub(true)
+            node.content = it.title
+            node.id = it.id
+            node.nodeTime = it.dateCreated
+            node.nodeType = Constants.NodeType.textAndPic.value
+            node.subUrl = protocol+domain+"/1/story/"+Base32Util.enCode32(""+it.id)
+            def pics = getPics(it.id)
+            if (pics.size() > 0) {
+                node.pics = pics
+            }else {
+                if (it.pic) {
+                    node.pics << it.pic
+                }
+            }
+
+            boolean isAdded = false
+            for (int i=0;i < list.size();i++){
+                if (list.get(i).nodeTime.after(node.nodeTime)){
+                    list.add(i,node)
+                    isAdded = true
+                }
+            }
+            if (!isAdded){
+                list << node
+            }
+        }
+
+        PageVO<StoryNodeVO> page = new PageVO<StoryNodeVO>()
         page.count = all.totalCount
         page.result = list
         return page
+    }
+
+    List<String> getPics(long storyId){
+        List<String> list = Lists.newArrayList()
+        Node.findAllByStoryIdAndStatusAndPicUrlIsNotNull(storyId,1 as Byte,[max: 9, sort: "dateCreated", order: "desc"]).each {
+            list << it.picUrl
+        }
+        return list
     }
 
     /**
