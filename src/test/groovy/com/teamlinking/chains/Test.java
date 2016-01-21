@@ -47,6 +47,7 @@ public class Test {
         System.out.println("date:"+CommonUtil.matcherDate("#2013-01-31#"));
         System.out.println("date:"+CommonUtil.matcherDate("#2013年1月31日#"));
         System.out.println("date:"+CommonUtil.matcherDate("#2013年1月#"));
+        System.out.println("date:"+CommonUtil.matcherDate("#2013年132#"));
 
 
     }

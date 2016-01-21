@@ -64,6 +64,7 @@ public class CommonUtil {
                             return date;
                         }
                     }catch (Exception e3){
+                        return null;
                     }
                 }
             }
