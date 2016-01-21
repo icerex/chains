@@ -6,6 +6,7 @@ import com.teamlinking.chains.Story
 import com.teamlinking.chains.User
 import com.teamlinking.chains.UserState
 import com.teamlinking.chains.common.Base32Util
+import com.teamlinking.chains.common.Constants
 import com.teamlinking.chains.vo.StoryVO
 import grails.config.Config
 import org.apache.commons.lang.Validate
@@ -149,6 +150,7 @@ class StoryService {
                     uid: uid,
                     dateCreated: new Date(),
                     title: "人生就是一场戏",
+                    pic: Constants.DEFAULT_STORY_BACK_GROUND,
                     lastUpdated: new Date()
             )
             return story.save(flush: true,failOnError: true)

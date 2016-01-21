@@ -124,12 +124,15 @@ public interface Constants {
         }
 
     }
-
+    //Base ENCODE
     String ENCODE_32_SALT = "8esflhw9y2435kcr6xqinojzm7pgd1tv";
-
+    //时间设置格式
     String DATE_SET_EL = "^#\\d{4}.*#$";
 
+    //微信文字命令
     String WECHAT_MSGTYPE_TEXT_COMMAND_UNDO = "取消";
+
+    String DEFAULT_STORY_BACK_GROUND = "http://77l5lr.com1.z0.glb.clouddn.com/bg.png";
 
     /** 微信消息返回 **/
     String WECHAT_MSG_SUBSCRIBE = "你好!欢迎来到记忆的空间,你可以回复'帮助'两字查看使用说明";
