@@ -120,7 +120,7 @@ class NodeService {
             node.nodeTime = date
             return popNode(node,Constants.NodeType.pase(node.nodeType))
         }
-        return node
+        return null
     }
 
     /**
