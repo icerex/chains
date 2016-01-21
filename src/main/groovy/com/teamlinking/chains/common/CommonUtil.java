@@ -2,6 +2,7 @@ package com.teamlinking.chains.common;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -70,6 +71,15 @@ public class CommonUtil {
             }
         }
         return null;
+    }
+
+    /**
+     * 生成上传key
+     * @param data
+     * @return
+     */
+    public static String uploadPrimaryKey(final byte[] data){
+        return UUID.nameUUIDFromBytes(data).toString();
     }
 
     /**

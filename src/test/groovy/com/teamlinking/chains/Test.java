@@ -4,11 +4,6 @@ import com.teamlinking.chains.common.Base32Util;
 import com.teamlinking.chains.common.CommonUtil;
 import com.teamlinking.chains.common.Constants;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /**
  * Created by admin on 16/1/15.
  */
@@ -49,6 +44,8 @@ public class Test {
         System.out.println("date:"+CommonUtil.matcherDate("#2013年1月#"));
         System.out.println("date:"+CommonUtil.matcherDate("#2013年132#"));
 
+        System.out.println("---------------------");
 
+        System.out.println("uuid:"+CommonUtil.uploadPrimaryKey("sdas".getBytes()));
     }
 }

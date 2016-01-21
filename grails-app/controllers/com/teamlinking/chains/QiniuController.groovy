@@ -10,7 +10,7 @@ class QiniuController {
         def jsonReq = request.JSON
 
         AvThBack avBack = new AvThBack()
-        avBack.code = jsonReq.code //
+        avBack.code = jsonReq.code
         avBack.id = jsonReq.id
         avBack.inputBucket = jsonReq.inputBucket
         avBack.pipeline = jsonReq.pipeline

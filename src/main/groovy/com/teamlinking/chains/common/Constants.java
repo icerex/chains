@@ -122,7 +122,20 @@ public interface Constants {
             this.key = key;
             this.value = value;
         }
+    }
 
+    enum FileType {
+        pic("图片", 8),
+        audio("音频", 16),
+        video("视频", 32);
+
+        public String key;
+        public int value;
+
+        FileType(String key, int value) {
+            this.key = key;
+            this.value = value;
+        }
     }
     //Base ENCODE
     String ENCODE_32_SALT = "8esflhw9y2435kcr6xqinojzm7pgd1tv";
