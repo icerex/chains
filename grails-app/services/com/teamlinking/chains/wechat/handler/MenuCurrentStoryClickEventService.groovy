@@ -27,7 +27,7 @@ class MenuCurrentStoryClickEventService implements WxMpMessageHandler{
             str = cm.value
         }
         List<StorySimpleVO> storys = findStorys(currentStory.uid,currentStory.parentId,currentStory.id)
-        String content = String.format(Constants.WECHAT_MSG_CURRENT_STORY,getStoryString(storys),str)
+        String content = String.format(Constants.WECHAT_MSG_CURRENT_STORY,getStoryString(storys,""),str)
         return WxMpXmlOutMessage.TEXT().content(content).fromUser(wxMessage.toUserName).toUser(wxMessage.fromUserName).build()
     }
 
