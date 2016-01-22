@@ -1,8 +1,6 @@
 package com.teamlinking.chains.wechat.eventbus
 
 import com.alibaba.fastjson.JSON
-import com.alibaba.fastjson.JSONObject
-import com.google.common.eventbus.Subscribe
 import com.teamlinking.chains.Node
 import com.teamlinking.chains.Story
 import com.teamlinking.chains.UploadRecord
@@ -21,7 +19,6 @@ class UploadListenerService {
     QiniuUpload qiniuUpload
     WxMpService wxMpService
 
-    @Subscribe
     public void lister(final UploadEvent event) {
         byte[] bytes  = download(event.mediaId)
         String key = CommonUtil.uploadPrimaryKey(bytes)
