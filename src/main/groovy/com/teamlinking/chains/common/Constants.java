@@ -137,6 +137,20 @@ public interface Constants {
             this.value = value;
         }
     }
+
+    enum OwnerType {
+        story("主题", 1),
+        node("节点", 2);
+
+        public String key;
+        public int value;
+
+        OwnerType(String key, int value) {
+            this.key = key;
+            this.value = value;
+        }
+    }
+
     //Base ENCODE
     String ENCODE_32_SALT = "8esflhw9y2435kcr6xqinojzm7pgd1tv";
     //时间设置格式
@@ -149,7 +163,7 @@ public interface Constants {
 
     /** 微信消息返回 **/
     String WECHAT_MSG_SUBSCRIBE = "你好!欢迎来到记忆的空间,你可以回复'帮助'两字查看使用说明";
-    String WECHAT_MSG_CURRENT_STORY = "当前主题:%s\n当前操作:%s";
+    String WECHAT_MSG_CURRENT_STORY = "主题:\n%s\n当前操作:%s";
     String WECHAT_MSG_NEXT_STORY = "切换完成,当前主题是'%s'";
     String WECHAT_MSG_NEXT_STORY_FAILE = "没有主题可以切换,当前主题是'%s'";
     String WECHAT_MSG_BACK_PARENT = "返回上级成功,当前主题是'%s'";
@@ -185,5 +199,8 @@ public interface Constants {
     String WECHAT_REFRESHTOKEN = "WECHAT_REFRESHTOKEN";
     String WECHAT_UNION_ID = "WECHAT_UNION_ID";
     String WECHAT_STORY_ID = "WECHAT_STORY_ID";
+
+    //七牛存储域名
+    String QINIU_DOMAIN = "http://teamlinking.u.qiniudn.com/";
 
 }

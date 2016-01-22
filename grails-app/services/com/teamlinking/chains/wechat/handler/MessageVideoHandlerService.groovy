@@ -5,6 +5,8 @@ import com.teamlinking.chains.UserState
 import com.teamlinking.chains.common.Constants
 import com.teamlinking.chains.domain.NodeService
 import com.teamlinking.chains.domain.WechatMessageService
+import com.teamlinking.chains.eventbus.UploadEvent
+import com.teamlinking.chains.wechat.eventbus.UploadEventBusService
 import me.chanjar.weixin.common.exception.WxErrorException
 import me.chanjar.weixin.common.session.WxSessionManager
 import me.chanjar.weixin.mp.api.WxMpMessageHandler
@@ -19,6 +21,7 @@ class MessageVideoHandlerService implements WxMpMessageHandler{
 
     NodeService nodeService
     WechatMessageService wechatMessageService
+    UploadEventBusService uploadEventBusService
 
     @Override
     WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage, Map<String, Object> context, WxMpService wxMpService, WxSessionManager sessionManager) throws WxErrorException {
@@ -32,7 +35,14 @@ class MessageVideoHandlerService implements WxMpMessageHandler{
             Node node = nodeService.saveByVideo(userState, wxMessage.mediaId)
             wechatMessageService.insert(userState.uid, node.id, wxMessage)
             content = Constants.WECHAT_MSG_NODE_VIDEO_SUCCESS
-            //todo 启动上传任务
+
+            //启动上传任务
+            uploadEventBusService.post(new UploadEvent(
+                    ownerType: Constants.OwnerType.node,
+                    fileType: Constants.FileType.video,
+                    mediaId: node.videoId,
+                    ownerId: node.id
+            ))
         }
 
         return WxMpXmlOutMessage.TEXT().content(content).fromUser(wxMessage.toUserName).toUser(wxMessage.fromUserName).build()

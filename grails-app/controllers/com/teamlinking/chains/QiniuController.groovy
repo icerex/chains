@@ -1,10 +1,13 @@
 package com.teamlinking.chains
 
 import com.alibaba.fastjson.JSON
+import com.teamlinking.chains.domain.UploadCallBackService
 import com.teamlinking.chains.storage.AvItem
 import com.teamlinking.chains.storage.AvThBack
 
 class QiniuController {
+
+    UploadCallBackService uploadCallBackService
 
     def callback() {
         def jsonReq = request.JSON
@@ -34,9 +37,9 @@ class QiniuController {
             log.error("---> save qiniu call back info failed.......excp:" + e.getMessage(), e)
         }
         def result = [:]
-        /**
-         * todo 处理回调
-         */
+
+        uploadCallBackService.callback(avBack)
+
         result.status = 1
 
         withFormat {

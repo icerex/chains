@@ -1,12 +1,13 @@
 package com.teamlinking.chains.storage;
 
+import com.alibaba.fastjson.JSON;
+
 import java.io.Serializable;
 
 /**
  * Created by admin on 16/1/12.
  */
-public class UploadResult implements Serializable{
-    private static final long serialVersionUID = 2843511874972937926L;
+public class UploadResult{
     private String key;
     private String hash;
     private String ext;
@@ -33,5 +34,9 @@ public class UploadResult implements Serializable{
 
     public void setExt(String ext) {
         this.ext = ext;
+    }
+
+    public String toString(){
+        return JSON.toJSONString(this);
     }
 }

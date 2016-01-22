@@ -2,7 +2,6 @@ package com.teamlinking.chains
 
 class UploadRecord {
 
-
     Long id
 
     Date dateCreated
@@ -14,10 +13,14 @@ class UploadRecord {
     Integer fileType
     //文件唯一标示
     String key
-    //所属者,主题\节点
+    //所属者,主题\节点 ID
     Long ownerId
+    //所属者类型,主题\节点
+    Integer ownerType
 
     String url
+
+    String params
 
     static constraints = {
         dateCreated nullable: false, blank: false
@@ -25,13 +28,16 @@ class UploadRecord {
         fileType nullable: false, blank:false
         key nullable: false, blank:false
         ownerId nullable: false, blank:false
+        ownerType nullable: false, blank:false
         lastUpdated nullable: true, blank:true
         url nullable: true, blank: true
+        params nullable: true, blank: true
     }
 
     static mapping = {
         table('t_upload_queue')
         version(false)
         id generator: 'identity'
+        key unique: true
     }
 }
