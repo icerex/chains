@@ -37,7 +37,7 @@ beans = {
                 bucket = "teamlinking"
                 audioPipeline = "mp3cut"
                 vedioPipeline = "mp4cut"
-                persistentNotifyUrl = "http://chains.teamlinking.com/api/1.0/qiniu/callback"
+                persistentNotifyUrl = "http://testchains.teamlinking.com/api/1.0/qiniu/callback"
             }
 
             break

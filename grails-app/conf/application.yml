@@ -88,7 +88,7 @@ dataSource:
 
 environments:
     development:
-        domain : "chains.7nb.com.cn"
+        domain : "testchains.teamlinking.com"
         protocol : "http://"
         dataSource:
             dbCreate : "update" # one of 'create', 'create-drop', 'update', 'validate', ''
@@ -115,7 +115,7 @@ environments:
                 jdbcInterceptors: ConnectionState
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
     test:
-        domain : "chains.7nb.com.cn"
+        domain : "testchains.teamlinking.com"
         protocol : "http://"
         dataSource:
             dbCreate : "update" # one of 'create', 'create-drop', 'update', 'validate', ''
