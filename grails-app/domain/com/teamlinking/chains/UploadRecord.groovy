@@ -12,7 +12,7 @@ class UploadRecord {
     //文件类型
     Integer fileType
     //文件唯一标示
-    String key
+    String inputKey
     //所属者,主题\节点 ID
     Long ownerId
     //所属者类型,主题\节点
@@ -26,7 +26,7 @@ class UploadRecord {
         dateCreated nullable: false, blank: false
         status inList: [1 as byte, 0 as byte]
         fileType nullable: false, blank:false
-        key nullable: false, blank:false
+        inputKey nullable: false, blank:false
         ownerId nullable: false, blank:false
         ownerType nullable: false, blank:false
         lastUpdated nullable: true, blank:true
@@ -35,9 +35,9 @@ class UploadRecord {
     }
 
     static mapping = {
-        table('t_upload_queue')
+        table('t_upload_record')
         version(false)
         id generator: 'identity'
-        key unique: true
+        inputKey unique: true
     }
 }

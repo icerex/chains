@@ -116,7 +116,7 @@ class UploadListenerService {
             return new UploadRecord(
                     dateCreated: new Date(),
                     lastUpdated: new Date(),
-                    key: result.key,
+                    inputKey: result.key,
                     ownerId: event.ownerId,
                     ownerType: event.ownerType.value,
                     fileType: event.fileType.value,
@@ -128,6 +128,6 @@ class UploadListenerService {
     }
 
     UploadRecord getRecord(String key){
-        return UploadRecord.findByKey(key)
+        return UploadRecord.findByInputKey(key)
     }
 }

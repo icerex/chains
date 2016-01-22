@@ -9,7 +9,7 @@ import com.teamlinking.chains.storage.AvThBack
 class UploadCallBackService {
 
     def callback(AvThBack back) {
-        UploadRecord record = UploadRecord.findByKey(back.inputKey)
+        UploadRecord record = UploadRecord.findByInputKey(back.inputKey)
         if (record){
             if (back.items.size() > 0){
                 record.url = Constants.QINIU_DOMAIN + back.items.get(0).key

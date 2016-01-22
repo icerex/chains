@@ -5,7 +5,6 @@ import com.google.common.eventbus.Subscribe
 import com.teamlinking.chains.eventbus.UploadEvent
 import org.springframework.beans.factory.InitializingBean
 
-import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 
 /**
