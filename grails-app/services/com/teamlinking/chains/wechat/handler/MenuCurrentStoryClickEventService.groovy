@@ -51,7 +51,7 @@ class MenuCurrentStoryClickEventService implements WxMpMessageHandler{
         StringBuilder sb = new StringBuilder()
         storys.each {
             sb.append(temp+it.title+"\n")
-            sb.append(getStoryString(it.subs,"|-")+"\n")
+            sb.append(getStoryString(it.subs,"|-"))
         }
         return sb.toString()
     }
