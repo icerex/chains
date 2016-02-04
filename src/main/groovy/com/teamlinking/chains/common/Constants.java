@@ -203,7 +203,7 @@ public interface Constants {
             "啦啦啦！\n" +
             "我是卖报的小行家，\n" +
             "不等天明去等派报";
-    String WECHAT_HELP_TEST_picUrl = "https://mp.weixin.qq.com/cgi-bin/downloadfile?fileid=402285233&token=2093224235&lang=zh_CN";
+    String WECHAT_HELP_TEST_picUrl = "https://mmbiz.qlogo.cn/mmbiz/1wnvtA5gUfEbdzibAwciaic2fpbibYxNwYHBLMurO1macwibXSORrgxMxjVibd1sh9nduplibiamObrZEicjPYORa80khXA/0?wx_fmt=png";
     String WECHA_HELPT_TEST_title = "帮助文档";
     String WECHA_HELPT_TEST_url = "http://mp.weixin.qq.com/s?__biz=MzAxODc3ODkwOQ==&mid=402285247&idx=1&sn=3bd3dd4b826e62c12997ea8f44819d43#rd";
 
