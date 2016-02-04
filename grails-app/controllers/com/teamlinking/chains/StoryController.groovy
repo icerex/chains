@@ -96,9 +96,18 @@ class StoryController {
             result.data = vo
             result.hasNext = vo.count - offset - max > 0
         }
+        
+        String callback = params."callback" as String
+        String text = null
+        if (StringUtils.isNotBlank(callback)){
+            text = callback +"("+JSON.toJSONString(result)+")"
+        }else{
+            text = JSON.toJSONString(result)
+        }
+
         withFormat {
             json {
-                render text: JSON.toJSONString(result), contentType: 'application/json;', encoding: "UTF-8"
+                render text: text, contentType: 'application/json;', encoding: "UTF-8"
             }
         }
     }
