@@ -96,7 +96,7 @@ class StoryController {
             result.data = vo
             result.hasNext = vo.count - offset - max > 0
         }
-        
+
         String callback = params."callback" as String
         String text = null
         if (StringUtils.isNotBlank(callback)){

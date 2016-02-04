@@ -158,6 +158,7 @@ public interface Constants {
 
     //微信文字命令
     String WECHAT_MSGTYPE_TEXT_COMMAND_UNDO = "取消";
+    String WECHAT_MSGTYPE_TEXT_COMMAND_HELP = "帮助";
 
     String DEFAULT_STORY_BACK_GROUND = "http://77l5lr.com1.z0.glb.clouddn.com/bg.png";
 
@@ -192,6 +193,19 @@ public interface Constants {
     String WECHAT_MSG_NODE_NO_DATA_FAILE = "没有可操作的数据";
     String WECHAT_MSG_NODE_DATE_FAILE = "时间格式错误,请按住下列格式设置:\n#2016-01-23#\n或\n#2016年1月23号#";
     String WECHAT_MSG_NODE_DATE_SUCCESS = "时间设置成功";
+
+    String WECHAT_HELP_PRODUCT_description = "";
+    String WECHAT_HELP_PRODUCT_picUrl = "";
+    String WECHA_HELPT_PRODUCT_title = "";
+    String WECHA_HELPT_PRODUCT_url = "";
+
+    String WECHAT_HELP_TEST_description = "啦啦啦！\n" +
+            "啦啦啦！\n" +
+            "我是卖报的小行家，\n" +
+            "不等天明去等派报";
+    String WECHAT_HELP_TEST_picUrl = "https://mp.weixin.qq.com/cgi-bin/downloadfile?fileid=402285233&token=2093224235&lang=zh_CN";
+    String WECHA_HELPT_TEST_title = "帮助文档";
+    String WECHA_HELPT_TEST_url = "http://mp.weixin.qq.com/s?__biz=MzAxODc3ODkwOQ==&mid=402285247&idx=1&sn=3bd3dd4b826e62c12997ea8f44819d43#rd";
 
     //微信用户cookie常量
     String WECHAT_OPEN_ID = "WECHAT_OPEN_ID";

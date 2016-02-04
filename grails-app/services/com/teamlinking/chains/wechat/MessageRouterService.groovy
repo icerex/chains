@@ -1,6 +1,7 @@
 package com.teamlinking.chains.wechat
 
 import com.teamlinking.chains.common.Constants
+import com.teamlinking.chains.wechat.handler.HelpEventService
 import com.teamlinking.chains.wechat.handler.LocationEventService
 import com.teamlinking.chains.wechat.handler.MenuCommandClickEventService
 import com.teamlinking.chains.wechat.handler.MenuCurrentStoryClickEventService
@@ -32,6 +33,7 @@ class MessageRouterService implements InitializingBean {
     MenuCommandClickEventService menuCommandClickEventService
     UndoCommandEventService undoCommandEventService
     LocationEventService locationEventService
+    HelpEventService helpEventService
 
     MessageTextHandlerService messageTextHandlerService
     MessageImageHandlerService messageImageHandlerService
@@ -48,6 +50,8 @@ class MessageRouterService implements InitializingBean {
     public void afterPropertiesSet() throws Exception {
         wxMpMessageRouter = new WxMpMessageRouter(wxMpService)
         wxMpMessageRouter = wxMpMessageRouter.rule().async(false).msgType(WxConsts.XML_MSG_EVENT).event(WxConsts.EVT_SUBSCRIBE).handler(subscribeEventService).end()
+
+        wxMpMessageRouter = wxMpMessageRouter.rule().async(false).msgType(WxConsts.XML_MSG_TEXT).content(Constants.WECHAT_MSGTYPE_TEXT_COMMAND_HELP).handler(helpEventService).end()
 
         wxMpMessageRouter = wxMpMessageRouter.rule().async(false).msgType(WxConsts.XML_MSG_EVENT).event(WxConsts.BUTTON_CLICK).eventKey(Constants.WechatMenu.undo.key).handler(undoCommandEventService).interceptor(dataInterceptorService).end()
 
