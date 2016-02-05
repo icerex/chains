@@ -16,7 +16,5 @@
     backgroud:${story.pic}<br>
     avatar:${user.headImgUrl}<br>
     desc:${desc}<br>
-    vo:${vo}<br>
-    hasNext:${hasNext}
 </body>
 </html>
