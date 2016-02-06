@@ -19,6 +19,7 @@
     <link href="//assets.teamlinking.com/assets/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="//assets.teamlinking.com/assets/lib/css/video-js.css">
 </head>
+<<<<<<< HEAD
 <body id="detail">
     <header>
         <h1 href="" id="avatar"></h1>
@@ -36,5 +37,13 @@
     <script src="//assets.teamlinking.com/assets/lib/js/videojs.hls.min.js"></script>
     <script src="//assets.teamlinking.com/assets/js/data.js"></script>
     <script src="//assets.teamlinking.com/assets/js/detail.js"></script>
+=======
+
+<body>
+    id:${story.id}<br>
+    backgroud:${story.pic}<br>
+    avatar:${user.headImgUrl}<br>
+    desc:${desc}<br>
+>>>>>>> 105018dacd31b3dfb15fa87042d3f21104731e7d
 </body>
 </html>

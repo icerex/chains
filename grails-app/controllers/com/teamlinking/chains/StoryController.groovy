@@ -47,14 +47,14 @@ class StoryController {
             desc = "desc"
         }
 
-        def vo = nodeService.list(id,MAX,0,desc,grailsApplication.config)
+//        def vo = nodeService.list(id,MAX,0,desc,grailsApplication.config)
 
         render(view: "index", model: [
                 story: story,
                 user: user,
-                desc: desc,
-                vo: JSON.toJSONString(vo),
-                hasNext: vo.count - 20 > 0
+//                vo: JSON.toJSONString(vo),
+//                hasNext: vo.count - 20 > 0,
+                desc: desc
         ])
     }
 
