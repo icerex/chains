@@ -21,21 +21,14 @@ class Node {
     String content
 
     String picUrl
-    //音频id
-    String audioId
-    //音频地址
-    String audioUrl
-    //音频的长度,单位s
-    Double audioDuration
-    //音视频上传状态
-    Byte audioLoadState = 0 as Byte
+
     //视频id
     String videoId
     //音频地址
     String videoUrl
     //视频的长度,单位s
     Double videoDuration
-    //音视频上传状态
+    //视频上传状态
     Byte videoLoadState = 0 as Byte
 
     String locationLab
@@ -54,10 +47,6 @@ class Node {
         lastUpdated nullable: true, blank:true
         content nullable: true, blank: true
         picUrl nullable: true, blank:true
-        audioId nullable: true, blank:true
-        audioUrl nullable: true, blank:true
-        audioDuration nullable: true, blank:true
-        audioLoadState nullable: true, blank:true
         videoId nullable: true, blank:true
         videoUrl nullable: true, blank:true
         videoDuration nullable: true, blank:true

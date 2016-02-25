@@ -57,13 +57,9 @@ public interface Constants {
     enum NodeType{
         text("文字",1),
         pic("图片",8),
-        audio("音频",16),
         video("视频",32),
         textAndPic("图文",9),
-        textAndAudio("文字+音频",17),
-        textAndVideo("文字+视频",33),
-        audioAndPic("图音",24),
-        audioAndVideo("音频+视频",48);
+        textAndVideo("文字+视频",33);
 
         public String key;
         public int value;
@@ -90,9 +86,8 @@ public interface Constants {
          * @return
          */
         public NodeType pop(NodeType nt){
-            if ((this == textAndPic || this == textAndAudio || this == textAndVideo
-                    || this == audioAndPic || this == audioAndVideo)
-                    && (nt == text || nt == pic || nt == audio || nt == video)){
+            if ((this == textAndPic || this == textAndVideo)
+                    && (nt == text || nt == pic || nt == video)){
                 return pase(this.value & nt.value);
             }
             return null;
@@ -126,7 +121,6 @@ public interface Constants {
 
     enum FileType {
         pic("图片", 8),
-        audio("音频", 16),
         video("视频", 32);
 
         public String key;
@@ -164,6 +158,7 @@ public interface Constants {
 
     /** 微信消息返回 **/
     String WECHAT_MSG_SUBSCRIBE = "你好!欢迎来到记忆的空间,你可以回复'帮助'两字查看使用说明";
+    String WECHAT_MSG_AUDIO_RETURN = "系统不支持语音消息,请发送文字、图片或视频";
     String WECHAT_MSG_CURRENT_STORY = "主题:\n%s\n当前操作:%s";
     String WECHAT_MSG_NEXT_STORY = "切换完成,当前主题是'%s'";
     String WECHAT_MSG_NEXT_STORY_FAILE = "没有主题可以切换,当前主题是'%s'";
@@ -185,7 +180,6 @@ public interface Constants {
 
     String WECHAT_MSG_NODE_TEXT_SUCCESS = "保存成功";
     String WECHAT_MSG_NODE_IMAGE_SUCCESS = "图片保存成功";
-    String WECHAT_MSG_NODE_AUDIO_SUCCESS = "语音保存成功";
     String WECHAT_MSG_NODE_VIDEO_SUCCESS = "视频保存成功";
     String WECHAT_MSG_NODE_LOCATION_SUCCESS = "地理位置设置成功";
     String WECHAT_MSG_NODE_FAILE = "你正在执行'%s',请先完成流程后再执行,或者回复文字'取消'或使用操作菜单中'撤销'按钮中断流程";

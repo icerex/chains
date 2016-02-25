@@ -19,33 +19,10 @@ import me.chanjar.weixin.mp.bean.WxMpXmlOutMessage
  */
 class MessageAudioHandlerService implements WxMpMessageHandler{
 
-    NodeService nodeService
-    WechatMessageService wechatMessageService
-    UploadEventBusService uploadEventBusService
-
     @Override
     WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage, Map<String, Object> context, WxMpService wxMpService, WxSessionManager sessionManager) throws WxErrorException {
-        UserState userState = context.get("userState") as UserState
-        String content = null
-        if (userState.command){
-            //如果在执行命令,不能接受语音消息
-            content = String.format(Constants.WECHAT_MSG_NODE_FAILE,Constants.WechatCommand.pase(userState.command).value)
-        }else {
-            //记录节点
-            Node node = nodeService.saveByAudio(userState, wxMessage.mediaId)
-            wechatMessageService.insert(userState.uid, node.id, wxMessage)
-            content = Constants.WECHAT_MSG_NODE_AUDIO_SUCCESS
 
-            //启动上传任务
-            uploadEventBusService.post(new UploadEvent(
-                    ownerType: Constants.OwnerType.node,
-                    fileType: Constants.FileType.audio,
-                    mediaId: node.audioId,
-                    ownerId: node.id
-            ))
-        }
-
-        return WxMpXmlOutMessage.TEXT().content(content).fromUser(wxMessage.toUserName).toUser(wxMessage.fromUserName).build()
+        return WxMpXmlOutMessage.TEXT().content( Constants.WECHAT_MSG_AUDIO_RETURN).fromUser(wxMessage.toUserName).toUser(wxMessage.fromUserName).build()
     }
 
 }

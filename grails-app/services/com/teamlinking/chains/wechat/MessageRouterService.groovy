@@ -67,7 +67,7 @@ class MessageRouterService implements InitializingBean {
 
         wxMpMessageRouter = wxMpMessageRouter.rule().async(false).msgType(WxConsts.XML_MSG_IMAGE).handler(messageImageHandlerService).interceptor(dataInterceptorService).end()
 
-        wxMpMessageRouter = wxMpMessageRouter.rule().async(false).msgType(WxConsts.XML_MSG_VOICE).handler(messageAudioHandlerService).interceptor(dataInterceptorService).end()
+        wxMpMessageRouter = wxMpMessageRouter.rule().async(false).msgType(WxConsts.XML_MSG_VOICE).handler(messageAudioHandlerService).end()
 
         wxMpMessageRouter = wxMpMessageRouter.rule().async(false).msgType(WxConsts.XML_MSG_VIDEO).handler(messageVideoHandlerService).interceptor(dataInterceptorService).end()
 

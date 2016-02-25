@@ -48,33 +48,6 @@ class UploadListenerService {
                     }
                 }
                 break
-            case Constants.FileType.audio:
-                UploadRecord record = getRecord(key)
-                double duration = 0
-                if (record == null) {
-                    AvinfoResult result = qiniuUpload.uploadAudio(bytes,key)
-                    record = saveRecord(result,event)
-                    duration = result.duration
-                }else {
-                    def json = JSON.parseObject(record.params)
-                    if (json) {
-                        duration = json.getDoubleValue("duration")
-                    }
-                }
-                if (record){
-                    Node node = Node.get(event.ownerId)
-                    if (node && node.audioId){
-                        if (node.audioId.equals(event.mediaId)) {
-                            node.audioUrl = record.url
-                            node.audioLoadState = Constants.AvLoadState.transcoding.value
-                            node.audioDuration = duration
-                            node.lastUpdated = new Date()
-                            node.save(flush: true, failOnError: true)
-                        }
-                    }
-                }
-
-                break
             case Constants.FileType.video:
                 UploadRecord record = getRecord(key)
                 double duration = 0

@@ -180,35 +180,6 @@ class NodeService {
     /**
      * 保存节点,5分钟内可叠加的合并成一个
      */
-    Node saveByAudio(UserState userState, String mediaId) {
-        Validate.notNull(userState)
-        Validate.notEmpty(mediaId)
-        Node node = getLastNode(userState.currentStoryId)
-        if (node && CommonUtil.isFiveMinuteable(node.dateCreated)){
-            //是否可用合并
-            Constants.NodeType nt = Constants.NodeType.pase(node.nodeType).stack(Constants.NodeType.audio)
-            if (nt){
-                node.audioId = mediaId
-                node.audioLoadState = Constants.AvLoadState.uploading.value
-                return popNode(node,nt)
-            }
-        }
-        node = new Node(
-                dateCreated: new Date(),
-                nodeTime: new Date(),
-                uid: userState.uid,
-                storyId: userState.currentStoryId,
-                audioId: mediaId,
-                audioLoadState:Constants.AvLoadState.uploading.value,
-                longitude: userState.longitude,
-                latitude: userState.latitude
-        )
-        return popNode(node,Constants.NodeType.audio)
-    }
-
-    /**
-     * 保存节点,5分钟内可叠加的合并成一个
-     */
     Node saveByVideo(UserState userState, String mediaId) {
         Validate.notNull(userState)
         Validate.notEmpty(mediaId)

@@ -34,20 +34,6 @@ class UploadCallBackService {
                             }
                         }
                         break
-                    case Constants.FileType.audio.value:
-                        if (record){
-                            Node node = Node.get(record.ownerId)
-                            if (node && node.audioId){
-                                if (node.audioLoadState.equals(Constants.AvLoadState.transcoding.value)) {
-                                    node.audioUrl = record.url
-                                    node.audioLoadState = Constants.AvLoadState.complete.value
-                                    node.lastUpdated = new Date()
-                                    node.save(flush: true, failOnError: true)
-                                }
-                            }
-                        }
-
-                        break
                     case Constants.FileType.video.value:
                         if (record){
                             Node node = Node.get(record.ownerId)
