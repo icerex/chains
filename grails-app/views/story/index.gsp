@@ -22,6 +22,7 @@
 <body id="detail">
     <header>
         <h1 href="" id="avatar"></h1>
+        <i class="icon"></i>
     </header>
     <ul id="detail-list" class="contain-line"></ul>
     <div id="data-area">
@@ -29,7 +30,6 @@
         <em id="header-bg">${story.pic}</em>
         <em id="avatar-url">${user.headImgUrl}</em>
         <em id="sequence">${desc}</em>
-        <span>vo:${vo}<br>hasNext:${hasNext}</span>
     </div>
     <script src="//assets.teamlinking.com/assets/lib/js/jquery.min.js"></script>
     <script src="//assets.teamlinking.com/assets/lib/js/video.js"></script>
